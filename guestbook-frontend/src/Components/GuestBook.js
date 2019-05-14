@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import './Styles.css';
-import Button from 'react-bootstrap/Button';
+import Guest from './Guest';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 class GuestBook extends Component {
     constructor(){
@@ -9,8 +12,21 @@ class GuestBook extends Component {
     }
     render(){
         return (
-            <div>
-                <Button variant="primary">Primary</Button>
+            <div className="divMargin">
+
+                <Container >
+                    <Row>
+                        <Col md={6}>
+                            <Guest guestName="ggg"/>
+
+                        </Col>
+                        <Col md={6}>
+                            <Guest/>
+
+                        </Col>
+                    </Row>
+                </Container>
+
             </div>
         );
     }
