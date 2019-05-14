@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "3000:3000"
+    networks:
+    - webappnet
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    volumes:
+     - ./data-node:/data/db
+    ports:
+     - 27017:27017
+    command: mongod --noauth --smallfiles
+    networks:
+     - webappnet
+networks:
+    webappnet:
+        driver: bridge
