@@ -7,6 +7,7 @@ class Guest extends Component {
         super(props);
 
     }
+
     render(){
         return (
             <Card>
