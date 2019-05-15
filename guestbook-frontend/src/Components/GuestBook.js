@@ -47,7 +47,7 @@ removeHandler = () =>{
                             data.map((guest, index) =>
 
                                 <Col sm={4}> <Note key={index} RemoveHandler={this.removeHandler} Id={index}
-                                                   task={guest.id} dateTime={String(guest.body)}/> </Col>
+                                                   name={guest.name} body={String(guest.body)}/> </Col>
                             )}
                     </Row>
                 </Container>
