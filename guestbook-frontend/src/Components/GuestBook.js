@@ -26,20 +26,29 @@ class GuestBook extends Component {
             Body: Body
         };
         data.push(arr);
+        this.setState={data}
         console.log(data);
     };
+removeHandler = () =>{
 
+};
     render(){
         return (
             <div className="divMargin">
                 <Container>
                     <Row>
-                        <Col md={6}>
+                     {/*   <Col md={6}>
                             <Guest guestName="123"/>
                         </Col>
                         <Col md={6}>
                             <Guest guestName="123"/>
-                        </Col>
+                        </Col>*/}
+                             {
+                            data.map((guest, index) =>
+
+                                <Col sm={4}> <Note key={index} RemoveHandler={this.removeHandler} Id={index}
+                                                   task={guest.id} dateTime={String(guest.body)}/> </Col>
+                            )}
                     </Row>
                 </Container>
 
