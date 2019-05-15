@@ -15,17 +15,16 @@ class App extends Component {
     };
     addHandler = (Name,Body) =>{
         this.refs.addNewGuest.addOne(Name,Body)
-       // alert(data)
     };
+
+
     render() {
         return (
             <div className="App">
-
                 <AddNew ref="child" addHandler={this.addHandler} />
                 <Header guestHandler={this.showAddGuestHandler}/>
-                <GuestBook ref="addNewGuest"/>
+                <GuestBook  ref="addNewGuest"/>
                 <Footer/>
-
             </div>
         );
     }

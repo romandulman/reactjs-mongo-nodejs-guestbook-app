@@ -18,15 +18,15 @@ class AddNew extends Component {
       };
   }
 
-    handleClose =()=>  {
+    handleClose = () =>  {
         this.setState({ show: false });
     };
-  handleAdd =()=> {
-      this.handleClose()
+  handleAdd = () => {
+      this.handleClose();
       this.props.addHandler(this.state.Name,this.state.Body ) // here we sends inputs the imputs
   }
 
-    handleShow =()=> {
+    handleShow = () => {
         this.setState({ show: true });
     };
 
