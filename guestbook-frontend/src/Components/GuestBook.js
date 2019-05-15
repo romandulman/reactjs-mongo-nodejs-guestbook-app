@@ -11,8 +11,8 @@ class GuestBook extends Component {
         this.state = {
             data: [
                 {
-                    Name: '',
-                    Body: ''
+                    Name: 'a',
+                    Body: 'b'
                 }
             ]
 
@@ -26,14 +26,23 @@ class GuestBook extends Component {
             Body: Body
         };
         data.push(arr);
-        this.setState={data}
+        this.setState({data});
         console.log(data);
     };
+
+    componentDidMount() {
+
+       // if (data != null) data = 0;//this.setState({data});
+
+    }
 removeHandler = () =>{
 
 };
     render(){
+      //  const data = this.state.data;
+
         return (
+
             <div className="divMargin">
                 <Container>
                     <Row>
@@ -44,10 +53,10 @@ removeHandler = () =>{
                             <Guest guestName="123"/>
                         </Col>*/}
                              {
-                            data.map((guest, index) =>
+                            this.state.data.map((guest, index) =>
 
-                                <Col sm={4}> <Note key={index} RemoveHandler={this.removeHandler} Id={index}
-                                                   name={guest.name} body={String(guest.body)}/> </Col>
+                                <Col sm={4}> <Guest key={index} RemoveHandler={this.removeHandler} Id={index}
+                                                   guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
                             )}
                     </Row>
                 </Container>
