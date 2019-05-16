@@ -12,8 +12,8 @@ var app = express();
 mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
 //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
