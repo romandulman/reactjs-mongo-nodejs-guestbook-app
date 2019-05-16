@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var mongoose = require('mongoose');
 var app = express();
 
-//mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
+mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
 //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
 app.set('views', path.join(__dirname, 'views'));
