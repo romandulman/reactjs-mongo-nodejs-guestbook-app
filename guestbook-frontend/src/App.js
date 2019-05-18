@@ -6,12 +6,9 @@ import AddNew from './Components/AddNew'
 import Header from './Components/Header'
 
 class App extends Component {
-    constructor(props){
-        super(props);
-    }
 
     showAddGuestHandler = () =>{
-        this.refs.child.handleShow();
+        this.refs.addNew.handleShow();
     };
     addHandler = (Name,Body) =>{
         this.refs.addNewGuest.addOne(Name,Body)
@@ -21,9 +18,9 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <AddNew ref="child" addHandler={this.addHandler} />
+                <AddNew ref="addNew" addHandler={this.addHandler} />
                 <Header guestHandler={this.showAddGuestHandler}/>
-                <GuestBook  ref="addNewGuest"/>
+                <GuestBook ref="addNewGuest"/>
                 <Footer/>
             </div>
         );

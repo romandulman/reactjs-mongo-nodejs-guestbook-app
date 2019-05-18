@@ -3,14 +3,10 @@ import './Styles.css';
 import Card from 'react-bootstrap/Card';
 
 class Guest extends Component {
-    constructor(props){
-        super(props);
-
-    }
 
     render(){
         return (
-            <Card>
+            <Card className="guestSty">
                 <Card.Header>{this.props.guestName}</Card.Header>
                 <Card.Body>
                     <blockquote className="blockquote mb-0">

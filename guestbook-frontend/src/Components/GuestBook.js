@@ -4,61 +4,65 @@ import Guest from './Guest';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-let arr;
+
 class GuestBook extends Component {
     constructor(){
         super();
         this.state = {
             data: [
                 {
-                    Name: 'a',
-                    Body: 'b'
+                    Name: '',
+                    Body: ''
                 }
             ]
-
         }
     }
 
-    addOne = (Name,Body)=>{
-       const data = this.state.data;
-        arr = {
+    addOne = (Name, Body) => {
+        const data = this.state.data;
+        let arr = {
             Name: Name,
             Body: Body
         };
         data.push(arr);
         this.setState({data});
-        console.log(data);
+        //  console.log(data);
     };
 
     componentDidMount() {
 
-       // if (data != null) data = 0;//this.setState({data});
+        fetch("http://127.0.0.1:8081/guests")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    let data = result;
+                    this.setState({data});
+                    //  console.log(this.state)
+                },
 
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
     }
-removeHandler = () =>{
 
-};
-    render(){
-      //  const data = this.state.data;
+    removeHandler = () => {
+
+    };
+
+    render() {
+        const ViewGuests = this.state.data.map((guest, index) =>
+            <Col sm={4}> <Guest c cla key={index} RemoveHandler={this.removeHandler} Id={index}
+                                guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
+        );
 
         return (
-
             <div className="divMargin">
                 <Container>
-                    <Row>
-                     {/*   <Col md={6}>
-                            <Guest guestName="123"/>
-                        </Col>
-                        <Col md={6}>
-                            <Guest guestName="123"/>
-                        </Col>*/}
-                             {
-                            this.state.data.map((guest, index) =>
-
-                                <Col sm={4}> <Guest key={index} RemoveHandler={this.removeHandler} Id={index}
-                                                   guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
-                            )}
-                    </Row>
+                    <Row>{ViewGuests}</Row>
                 </Container>
 
             </div>
