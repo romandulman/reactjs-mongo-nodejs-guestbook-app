@@ -22,5 +22,7 @@ router.get('/', function(req, res, next) {
 router.get('/users', (req, res) => {
     return res.send(Object.values(users));
 });
-
+router.post('/u', (req, res) => {
+    return res.send(Object.values(users));
+});
 module.exports = router;

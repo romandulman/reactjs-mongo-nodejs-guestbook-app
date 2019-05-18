@@ -1,57 +1,139 @@
+//
+//
+//
+//
+// var createError = require('http-errors');
+// var express = require('express');
+// var path = require('path');
+// var cookieParser = require('cookie-parser');
+// var logger = require('morgan');
+//
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
+// var mongoose = require('mongoose');
+// var app = express();
+// var router = express.Router();
+//
+//
+//
+// //app.set('views', path.join(__dirname, 'views'));
+// //app.set('view engine', 'ejs');
+//
+// app.use(logger('dev'));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(cookieParser());
+// //app.use(express.static(path.join(__dirname, 'public')));
+//
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+//
+//
+// // var db = mongoose.connection;
+// // db.on('error', console.error.bind(console, 'connection error:'));
+// // db.once('open', function() {
+// //     console.log('ok')
+// //
+// // });
+// // catch 404 and forward to error handler
+//
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
+//
+// // error handler
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+//
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
+//
+//
+//
+// module.exports = app;
+let users = {
+    1: {
+        id: '1',
+        username: 'Robin Wieruch',
+    },
+    2: {
+        id: '2',
+        username: 'Dave Davids',
+    },
+};
 
 
-
-
-var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
+var createError = require('http-errors');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var mongoose = require('mongoose');
 var app = express();
 
-//mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
-//mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
+// //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
 
 // var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//     console.log('ok')
-//
-// });
-// catch 404 and forward to error handler
+// // db.on('error', console.error.bind(console, 'connection error:'));
+// // db.once('open', function() {
+// //     console.log('ok')
+// //
+// // });
+
+
+app.get('/users', (req, res ) => {
+    return res.send(Object.values(users));
+});
+
+
+app.get('/', function (req, res) {
+    res.send('Hello World');
+});
+
+
+app.post('/u', (req, res) => {
+    return res.send(Object.values(users));
+});
+
+
+
+
+
 
 app.use(function(req, res, next) {
   next(createError(404));
-});
+ });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+
+
+
+
+// // error handler
+ app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+   res.status(err.status || 500);
+   res.render('error');
+ });
 
+var server = app.listen(8081, function () {
+    var host = server.address().address
+    var port = server.address().port
 
-
-module.exports = app;
+    console.log("Example app listening at http://%s:%s", host, port)
+})
