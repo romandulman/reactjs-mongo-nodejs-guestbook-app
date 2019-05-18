@@ -1,3 +1,7 @@
+
+
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,7 +13,7 @@ var usersRouter = require('./routes/users');
 var mongoose = require('mongoose');
 var app = express();
 
-mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
+//mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
 //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
 //app.set('views', path.join(__dirname, 'views'));
@@ -19,7 +23,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
