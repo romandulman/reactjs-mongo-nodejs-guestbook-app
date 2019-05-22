@@ -2,7 +2,7 @@
 Gusetbook App - Mongo DB + Node.JS Backend and React.JS frontend 
 ## in dvelopment...
 
-### you need to execute in the Docker MongoDB container commands to add dtabase and collection for the first time:
+### you need to execute in the  MongoDB Docker container commands to add database and collection for the first time:
 Some basic Git commands are:
 ```
 docker exec -i -t <your container name or ID> bash

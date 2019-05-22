@@ -5,16 +5,17 @@ services:
     ports:
      - "3000:3000"
     networks:
-    - webappnet
+     - webappnet
   mongodb:
-    image: mongo
-    restart: always
+    image: mongo:latest
+    ports:
+     - "27017:27017"
     container_name: mongodb
     volumes:
      - ./data-node:/data/db
     ports:
      - 27017:27017
-    command: mongod --noauth --smallfiles
+#    command: mongod --noauth --smallfiles
     networks:
      - webappnet
 networks:
