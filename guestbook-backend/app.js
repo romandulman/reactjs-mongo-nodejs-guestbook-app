@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
+mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev mongo container
 // //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
 var userSchema = mongoose.Schema({
