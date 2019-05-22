@@ -1,17 +1,3 @@
-let guests = [
-    {
-        Name: 'Aron',
-        Body: 'Aron was here'
-    },
-    {
-        Name: 'Sami',
-        Body: 'Sami was here'
-    },
-    {
-        Name: 'Benny',
-        Body: 'Benny was here'
-    }
-]
 
 
 var express = require('express');
@@ -32,18 +18,30 @@ app.use(cookieParser());
 mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev local network
 // //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
+var userSchema = mongoose.Schema({
+    Name: String,
+    Body: String
+});
 
 var db = mongoose.connection;
+var collection = db.collection('testcoll');
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-  console.log('ok')
+    console.log('Mongo Connected');
+    collection.find({Name: "Aron"}).toArray(function (err, guests) {
+        console.log(guests[0].Body) // test it
+    });
+
 });
 
 
 app.get('/guests', (req, res) => {
-    return res.send(Object.values(guests));
-});
+    collection.find().toArray(function (err, kittens) {
+        return res.send(Object.values(kittens))
+    });
 
+});
 
 app.post('/postguest', (req, res) => {
 
@@ -67,8 +65,8 @@ app.use(function (err, req, res, next) {
 });
 
 var server = app.listen(8081, function () {
-    var host = server.address().address
-    var port = server.address().port
+    var host = server.address().address;
+    var port = server.address().port;
 
     console.log("Example app listening at http://%s:%s", host, port)
-})
+});
