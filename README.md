@@ -13,11 +13,16 @@ use testdb
 
 show dbs
 
+db.createCollection("testcoll")
+
 db.testcoll.insertMany( [
       { Name: "Aron", Body: "Aron was here" },
       { Name: "Sami", Body: "Sami was here" },
       { Name: "Benny", Body: "Benny was here"}
    ] );
+```
 
+Find one object for test that he exist
+```
 db.collection.find( { Name: "Aron" } )
 ```
