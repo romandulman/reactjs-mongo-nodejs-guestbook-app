@@ -22,9 +22,8 @@ pipeline {
     }
     stage('Unit Tests '){
       steps {
-        sh 'ping google.com'
+        sh ''
       }
-
     }
     stage('Static Code Analysis'){
         environment {
