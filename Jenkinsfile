@@ -52,10 +52,20 @@ pipeline {
     }
 
     stage('UI Tests'){
-        steps{
-        sh ''
+             steps{
+             sh ''
 
-        }
+             }
+         }
+    stage('Load Tests'){
+     steps{
+      sh ''
+     }
+    }
+    stage('Publish Artifacts'){
+     steps{
+       sh ''
+     }
     }
   }
 }
