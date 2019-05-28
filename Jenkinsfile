@@ -54,5 +54,10 @@ pipeline {
 
      }
     }
+
+    stage('UI Tests'){
+        steps{
+        }
+    }
   }
 }
