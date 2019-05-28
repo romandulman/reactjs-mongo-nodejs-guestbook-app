@@ -11,16 +11,19 @@ pipeline {
       }
     }
 
+
     stage ('Verify Tools'){
-          steps {
-            parallel (
-              node: { sh "npm -v" },
-              docker: { sh "docker -v" }
-            )
-          }
-        }
-    stage('Unit Tests Front-End'){
-    sh 'cd guestbook-frontend && npm install'
+      steps {
+        parallel (
+          node: { sh "npm -v" },
+          docker: { sh "docker -v" }
+        )
+      }
+    }
+    stage('Unit Tests '){
+      steps {
+        sh 'cd guestbook-frontend && npm install'
+      }
 
     }
     stage('Static Code Analysis'){
@@ -36,7 +39,6 @@ pipeline {
             }
       }
     }
-
-
+    
   }
 }
