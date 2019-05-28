@@ -4,6 +4,7 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var createError = require('http-errors');
 var logger = require('morgan');
+var path = require('path');
 var cors = require('cors');
 var mongoose = require('mongoose');
 var app = express();
@@ -47,6 +48,7 @@ app.post('/postguest', (req, res) => {
 
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
     next(createError(404));
@@ -64,7 +66,7 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-var server = app.listen(8081, function () {
+var server = app.listen(8080, function () {
     var host = server.address().address;
     var port = server.address().port;
 

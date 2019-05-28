@@ -41,5 +41,14 @@ pipeline {
       }
     }
 
+    stage('Build Docker image'){
+     steps{
+        sh 'npm run build'
+        sh 'docker build -t guestbook .'
+
+     }
+
+    }
+
   }
 }

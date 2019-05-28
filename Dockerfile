@@ -2,11 +2,11 @@ FROM node:latest
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY  ./guestbook-backend/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./guestbook-backend .
 
 EXPOSE 8080
 CMD [ "npm", "start" ]

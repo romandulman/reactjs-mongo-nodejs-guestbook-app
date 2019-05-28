@@ -31,7 +31,7 @@ class GuestBook extends Component {
 
     componentDidMount() {
 
-        fetch("http://127.0.0.1:8081/guests")
+        fetch("http://127.0.0.1:8080/guests")
             .then(res => res.json())
             .then(
                 (result) => {
