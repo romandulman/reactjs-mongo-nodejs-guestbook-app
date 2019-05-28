@@ -57,6 +57,7 @@ pipeline {
 
     stage('UI Tests'){
         steps{
+        sh ''
         }
     }
   }
