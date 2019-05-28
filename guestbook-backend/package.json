@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./app.js"
+    "start": "nodemon ./app.js",
+    "test": "mocha"
+
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,6 +18,8 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
     "nodemon": "^1.19.0"
   }
 }
