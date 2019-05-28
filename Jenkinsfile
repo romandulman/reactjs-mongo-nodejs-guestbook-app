@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'jenkins-dind-nodejs-slave'
+      label 'host3-jenkins-dind-nodejs-slave'
     }
   }
   stages {
@@ -39,6 +39,6 @@ pipeline {
             }
       }
     }
-    
+
   }
 }
