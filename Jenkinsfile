@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Unit Tests '){
       steps {
-        sh ''
+        sh 'cd guestbook-backend'
       }
     }
     stage('Static Code Analysis'){
