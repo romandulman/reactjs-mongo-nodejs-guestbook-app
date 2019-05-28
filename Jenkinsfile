@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Unit Tests '){
       steps {
-        sh ''
+        sh 'ping google.com'
       }
 
     }
