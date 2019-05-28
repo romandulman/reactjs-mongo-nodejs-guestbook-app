@@ -4,14 +4,13 @@ pipeline {
       label 'host3-jenkins-dind-nodejs-slave'
     }
   }
+
   stages {
     stage ('Checkout Code') {
       steps {
         checkout scm
       }
     }
-
-
     stage ('Verify Tools'){
       steps {
         parallel (
@@ -24,7 +23,6 @@ pipeline {
       steps {
         sh 'cd guestbook-backend && npm install'
         sh 'cd guestbook-frontend && npm install'
-
       }
     }
     stage('Static Code Analysis'){
@@ -45,19 +43,18 @@ pipeline {
      steps{
         sh 'cd guestbook-frontend && npm  run build'
         sh 'docker build -t guestbook .'
-
      }
     }
     stage('Run Docker container'){
      steps{
         sh 'docker run  -d --name guestbook_app -p 8080:8080 guestbook '
-
      }
     }
 
     stage('UI Tests'){
         steps{
         sh ''
+
         }
     }
   }
