@@ -21,8 +21,8 @@ pipeline {
     }
     stage('Unit Tests'){
       steps {
-        sh 'cd guestbook-backend && npm install'
-        sh 'cd guestbook-frontend && npm install'
+        sh 'cd guestbook-backend && npm install && npm test'
+        sh 'cd guestbook-frontend && npm install && npm test'
       }
     }
     stage('Static Code Analysis'){
@@ -52,18 +52,20 @@ pipeline {
     }
 
     stage('UI Tests'){
-             steps{
-             sh ''
-
-             }
-         }
+     /* Run Selenium test  */
+      steps{
+        sh ''
+      }
+     }
     stage('Load Tests'){
      steps{
+     /* Load tests */
       sh ''
      }
     }
     stage('Publish Artifacts'){
      steps{
+     /* Publish artifacts to Nexus private docker registry */
        sh ''
      }
     }

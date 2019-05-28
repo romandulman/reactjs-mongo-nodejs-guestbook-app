@@ -3,7 +3,7 @@
 
 Gusetbook App - Mongo DB + Node.JS Backend and React.JS frontend, Docker and Jenkins CD/CI pipeline
 
-#### This Example project shows how to implement:
+#### This Example project implements:
 
 - Node.JS as backend with express, rest api and Mongoose
 - React.JS as frontend
@@ -13,6 +13,7 @@ Gusetbook App - Mongo DB + Node.JS Backend and React.JS frontend, Docker and Jen
 - Static Code Analysis with SonarQube
 - jenkins CD/CI pipeline
 - Build Docker image from Docker file and deploy whole env with Docker Compose
+- Publish artifacts to SonaType Nexus OSS
 
 #### You need to execute in the MongoDB Docker container commands to add a database and collection for the first time:
 
