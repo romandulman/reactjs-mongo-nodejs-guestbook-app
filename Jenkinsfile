@@ -43,12 +43,16 @@ pipeline {
 
     stage('Build Docker image'){
      steps{
-        sh 'npm run build'
+        sh 'cd guestbook-frontend && npm  run build'
         sh 'docker build -t guestbook .'
 
      }
-
     }
+    stage('Run Docker container'){
+     steps{
+        sh 'docker run  -d --name guestbook_app -p 8080:8080 guestbook '
 
+     }
+    }
   }
 }

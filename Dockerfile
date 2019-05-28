@@ -8,5 +8,8 @@ RUN npm install
 
 COPY ./guestbook-backend .
 
+# Copy  react app to our node server public dir
+COPY ./guestbook-frontend ./public
+
 EXPOSE 8080
 CMD [ "npm", "start" ]
