@@ -29,10 +29,11 @@ class GuestBook extends Component {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({arr})
         }).then((res) => {
+            if(res){
             this.setState({
                 data: [...this.state.data, arr]
             });
-
+            }
         });
     };
 

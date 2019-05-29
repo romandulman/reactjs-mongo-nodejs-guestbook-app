@@ -41,18 +41,17 @@ app.get('/guests', (req, res) => {
     collection.find().toArray(function (err, guests) {
         return res.send(Object.values(guests))
     });
-
 });
 
 app.post('/postguest', (req, res) => {
     console.log(req.body);
-    res.send('ok');
     collection.insertOne(
         {
             Name: req.body.arr.Name,
             Body: req.body.arr.Body
         }
     )
+    res.send('ok');
 });
 
 
