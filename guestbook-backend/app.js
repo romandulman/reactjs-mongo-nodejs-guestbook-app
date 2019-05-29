@@ -46,7 +46,7 @@ app.get('/guests', (req, res) => {
 
 app.post('/postguest', (req, res) => {
     console.log(req.body);
-    res.send = 'ok';
+    res.send('ok');
     collection.insertOne(
         {
             Name: req.body.arr.Name,

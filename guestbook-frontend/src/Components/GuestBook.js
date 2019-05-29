@@ -28,14 +28,12 @@ class GuestBook extends Component {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({arr})
-        }).then((res) => res.json())
-            .then((res) => {
-                if (res == 'ok') {
-                    this.setState({
-                        data: [...this.state.data, arr]
-                    });
-                }
+        }).then((res) => {
+            this.setState({
+                data: [...this.state.data, arr]
             });
+
+        });
     };
 
     componentDidMount() {
