@@ -15,7 +15,6 @@ app.use(cookieParser());
 mongoose.connect('mongodb://localhost:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
 
 let userSchema = mongoose.Schema({
-    Id: Number,
     Name: String,
     Body: String
 });
@@ -41,7 +40,6 @@ app.get('/guests', (req, res) => {
 app.post('/postguest', (req, res) => {
     console.log(req.body);
     let doc = {
-        Id: req.body.arr.Id,
         Name: req.body.arr.Name,
         Body: req.body.arr.Body
     };
