@@ -12,10 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-mongoose.connect('mongodb://localhost:27017/testdb', {useNewUrlParser: true}); // dev mongo container
-// //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
+mongoose.connect('mongodb://localhost:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
 
 let userSchema = mongoose.Schema({
+    Id: Number,
     Name: String,
     Body: String
 });
@@ -40,13 +40,15 @@ app.get('/guests', (req, res) => {
 
 app.post('/postguest', (req, res) => {
     console.log(req.body);
-    collection.insertOne(
-        {
-            Name: req.body.arr.Name,
-            Body: req.body.arr.Body
-        }
-    );
-    res.send('ok');
+    let doc = {
+        Id: req.body.arr.Id,
+        Name: req.body.arr.Name,
+        Body: req.body.arr.Body
+    };
+    collection.insertOne(doc, (error, response) => {
+        (error) ? console.log(error) : res.send(response);
+        console.log(error)
+    });
 });
 
 app.delete('/deleteguest', (req, res) => {
@@ -70,7 +72,7 @@ app.use((err, req, res, next) => {
     res.render('error');
 });
 
-let server = app.listen(8080,() =>{
+let server = app.listen(8080, () => {
     let host = server.address().address;
     let port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port)

@@ -45,7 +45,6 @@ class GuestBook extends Component {
                 (result) => {
                     let data = result;
                     this.setState({data});
-                    //  console.log(this.state)
                 },
 
                 (error) => {
@@ -63,7 +62,7 @@ class GuestBook extends Component {
 
     render() {
         const ViewGuests = this.state.data.map((guest, index) =>
-            <Col sm={4}> <Guest c cla key={index} RemoveHandler={this.removeHandler} Id={index}
+            <Col sm={4}> <Guest key={index} RemoveHandler={this.removeHandler} Id={index}
                                 guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
         );
 
