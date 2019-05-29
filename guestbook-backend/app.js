@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // dev mongo container
+mongoose.connect('mongodb://localhost:27017/testdb', {useNewUrlParser: true}); // dev mongo container
 // //mongoose.connect('mongodb://mongodb:27017/testdb', {useNewUrlParser: true}); //production docker network
 
 var userSchema = mongoose.Schema({
@@ -30,7 +30,7 @@ var collection = db.collection('testcoll');
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('Mongo Connected');
-    collection.find({Name: "Aron"}).toArray(function (err, guests) {
+    collection.find({Name: "Avi"}).toArray(function (err, guests) {
         console.log(guests[0].Body) // test it
     });
 
@@ -38,13 +38,25 @@ db.once('open', function () {
 
 
 app.get('/guests', (req, res) => {
-    collection.find().toArray(function (err, kittens) {
-        return res.send(Object.values(kittens))
+    collection.find().toArray(function (err, guests) {
+        return res.send(Object.values(guests))
     });
 
 });
 
 app.post('/postguest', (req, res) => {
+    console.log(req.body);
+    res.send = 'ok';
+    collection.insertOne(
+        {
+            Name: req.body.arr.Name,
+            Body: req.body.arr.Body
+        }
+    )
+});
+
+
+app.delete('/deleteguest', (req, res) => {
 
 });
 

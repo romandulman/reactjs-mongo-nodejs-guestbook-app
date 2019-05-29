@@ -19,14 +19,23 @@ class GuestBook extends Component {
     }
 
     addOne = (Name, Body) => {
-        const data = this.state.data;
         let arr = {
             Name: Name,
             Body: Body
         };
-        data.push(arr);
-        this.setState({data});
-        //  console.log(data);
+
+        fetch('http://127.0.0.1:8080/postguest', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({arr})
+        }).then((res) => res.json())
+            .then((res) => {
+                if (res == 'ok') {
+                    this.setState({
+                        data: [...this.state.data, arr]
+                    });
+                }
+            });
     };
 
     componentDidMount() {
