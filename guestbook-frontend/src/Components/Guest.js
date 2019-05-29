@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import './Styles.css';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button'
 
 class Guest extends Component {
 
-    render(){
+    handleRemove = () => {
+        this.props.RemoveHandler(this.props.Id);
+    };
+
+    render() {
         return (
             <Card className="guestSty">
                 <Card.Header>{this.props.guestName}</Card.Header>
@@ -16,6 +21,8 @@ class Guest extends Component {
                         <footer className="blockquote-footer">
                             Best Regards, <cite title="Source Title">{this.props.guestName}</cite>
                         </footer>
+                        <br/>
+                        <Button variant="outline-danger" onClick={this.handleRemove}>Remove Guest</Button>
                     </blockquote>
                 </Card.Body>
             </Card>

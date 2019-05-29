@@ -6,17 +6,14 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 class GuestBook extends Component {
-    constructor(){
-        super();
-        this.state = {
+        state = {
             data: [
                 {
                     Name: '',
                     Body: ''
                 }
             ]
-        }
-    }
+        };
 
     addOne = (Name, Body) => {
         let arr = {
@@ -56,13 +53,13 @@ class GuestBook extends Component {
             )
     }
 
-    removeHandler = () => {
-
+    RemoveHandler = (id) => {
+        console.log(id)
     };
 
     render() {
         const ViewGuests = this.state.data.map((guest, index) =>
-            <Col sm={4}> <Guest key={index} RemoveHandler={this.removeHandler} Id={index}
+            <Col sm={4}> <Guest  RemoveHandler={this.RemoveHandler} Id={index}
                                 guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
         );
 
