@@ -54,7 +54,18 @@ class GuestBook extends Component {
     }
 
     RemoveHandler = (id) => {
-        console.log(id)
+
+        fetch('http://127.0.0.1:8080/delguest', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({arr})
+        }).then((res) => {
+            if(res){
+                this.setState({
+                    data: [...this.state.data, arr]
+                });
+            }
+        });
     };
 
     render() {
