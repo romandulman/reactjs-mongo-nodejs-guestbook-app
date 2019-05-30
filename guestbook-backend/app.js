@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-mongoose.connect('mongodb://localhost:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
+mongoose.connect('mongodb://192.168.99.100:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
 
 let userSchema = mongoose.Schema({
     Name: String,
@@ -25,16 +25,18 @@ let collection = db.collection('testcoll');
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
     console.log('Mongo Connected');
-    collection.find({Name: "Avi"}).toArray((err, guests) => {
+    collection.find({Name: "Aron"}).toArray((err, guests) => {
         console.log(guests[0].Body) // test it
     });
 
 });
 
 app.get('/guests', (req, res) => {
-    collection.find().toArray(function (err, guests) {
-        return res.send(Object.values(guests))
-    });
+  collection.find().toArray(function (err, guests) {
+      return res.send(Object.values(guests))
+   });
+   //return  res.status(200).json({});
+
 });
 
 app.post('/postguest', (req, res) => {
@@ -50,6 +52,7 @@ app.post('/postguest', (req, res) => {
 });
 
 app.delete('/deleteguest', (req, res) => {
+
 
 });
 
@@ -75,3 +78,4 @@ let server = app.listen(8080, () => {
     let port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port)
 });
+//export default app;
