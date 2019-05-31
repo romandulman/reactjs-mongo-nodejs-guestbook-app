@@ -28,15 +28,20 @@ db.once('open', () => {
     collection.find({Name: "Aron"}).toArray((err, guests) => {
         console.log(guests[0].Body) // test it
     });
-
 });
 
 app.get('/guests', (req, res) => {
-  collection.find().toArray(function (err, guests) {
-      return res.send(Object.values(guests))
-   });
-   //return  res.status(200).json({});
+    collection.find().toArray(function (err, guests) {
+        (err) ? console.log(err) : res.send(Object.values(guests))
+    });
+});
 
+app.get('/guests/:name', (req, res) => {
+    collection.find({Name: req.params.name}).toArray((err, guests) => {
+        (!guests || guests.length <= 0) ?  res.status(404).json({
+            message: "Guest record not found",
+        }) : res.send(guests[0])
+    })
 });
 
 app.post('/postguest', (req, res) => {
@@ -78,4 +83,3 @@ let server = app.listen(8080, () => {
     let port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port)
 });
-//export default app;

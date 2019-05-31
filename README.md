@@ -7,7 +7,7 @@ Gusetbook App - Mongo DB + Node.JS Backend and React.JS frontend, Docker and Jen
 
 - Node.JS as backend with express, rest api and Mongoose
 - React.JS as frontend
-- Unit tests both in frontend & backend
+- Unit tests both in frontend & backend (Mocha, Chai, Chai-HTTP, Jest)
 - Load & Performance tests
 - Selenium UI tests with Node.JS
 - Static Code Analysis with SonarQube
