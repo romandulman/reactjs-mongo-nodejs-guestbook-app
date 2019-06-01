@@ -21,7 +21,8 @@ pipeline {
     }
     stage('Unit Tests'){
       steps {
-        sh 'cd guestbook-backend && npm install && npm test'
+        sh 'cd guestbook-backend && npm install && npm start && npm test'
+
         sh 'cd guestbook-frontend && npm install && npm test'
       }
     }

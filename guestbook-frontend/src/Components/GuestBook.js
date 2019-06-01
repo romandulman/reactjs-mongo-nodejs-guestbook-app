@@ -22,7 +22,7 @@ class GuestBook extends Component {
         };
 
         fetch('http://127.0.0.1:8080/postguest', {
-            method: 'post',
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({arr})
         }).then((res) => {
@@ -45,24 +45,27 @@ class GuestBook extends Component {
                 },
 
                 (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
+                 //   this.setState({
+                   //     isLoaded: true,
+                   //     error
+                  //  });
+
+                    alert('Error connecting server')
                 }
             )
     }
 
     RemoveHandler = (id) => {
-
+        const data = this.state.data;
         fetch('http://127.0.0.1:8080/delguest', {
-            method: 'post',
+            method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({arr})
         }).then((res) => {
             if(res){
+                data.splice(id, 1);
                 this.setState({
-                    data: [...this.state.data, arr]
+                    data: data
                 });
             }
         });

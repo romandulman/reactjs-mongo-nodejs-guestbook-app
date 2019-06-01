@@ -58,7 +58,6 @@ app.post('/postguest', (req, res) => {
 
 app.delete('/deleteguest', (req, res) => {
 
-
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
