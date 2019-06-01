@@ -1,5 +1,5 @@
 //process.title = guestbook-backend;
-process.title = process.argv[2];
+//process.title = process.argv[2];
 
 let express = require('express');
 let app = express();
@@ -86,3 +86,4 @@ let server = app.listen(8080, () => {
     console.log("Example app listening at http://%s:%s", host, port)
 });
 
+module.exports = server;
