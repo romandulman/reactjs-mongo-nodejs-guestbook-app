@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./app.js",
-    "test": "mocha --timeout 15000 --require @babel/register Test/app.test.js"
+    "test": "mocha --timeout 15000 --require @babel/register Test/app.test.js",
+    "stop": "killall -SIGINT nodejs-guestbook"
   },
   "dependencies": {
     "chai-http": "^4.3.0",

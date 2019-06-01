@@ -1,3 +1,6 @@
+//process.title = guestbook-backend;
+process.title = process.argv[2];
+
 let express = require('express');
 let cookieParser = require('cookie-parser');
 let createError = require('http-errors');
