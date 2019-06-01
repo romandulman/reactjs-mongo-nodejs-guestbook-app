@@ -2,13 +2,13 @@
 process.title = process.argv[2];
 
 let express = require('express');
+let app = express();
 let cookieParser = require('cookie-parser');
 let createError = require('http-errors');
 let logger = require('morgan');
 let path = require('path');
 let cors = require('cors');
 let mongoose = require('mongoose');
-let app = express();
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
@@ -85,3 +85,4 @@ let server = app.listen(8080, () => {
     let port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port)
 });
+

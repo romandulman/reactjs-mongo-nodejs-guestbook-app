@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./app.js",
-    "test": "mocha --timeout 15000 --require @babel/register Test/app.test.js",
+    "start-server": "nodemon ./app.js",
+    "test": "mocha --timeout 15000 ",
     "stop": "killall -SIGINT nodejs-guestbook"
   },
   "dependencies": {
