@@ -32,10 +32,7 @@ Create new DB "testdb"
 use testdb
 ```
 
-List all db to check if 'testdb' db is created
-```
-show dbs
-```
+
 
 Create new Collection "testcoll" and insert some data
 ```
@@ -48,7 +45,12 @@ db.testcoll.insertMany( [
    ] );
 ```
 
+List all db to check if 'testdb' db is created
+```
+show dbs
+```
+
 Test the new collection
 ```
-db.collection.find( { Name: "Aron" } )
+db.testcoll.find( { Name: "Aron" } )
 ```
