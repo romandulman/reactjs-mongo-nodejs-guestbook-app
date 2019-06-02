@@ -60,8 +60,10 @@ app.post('/postguest', (req, res) => {
     });
 });
 
-app.delete('/deleteguest', (req, res) => {
-
+app.delete('/delguest/:guestid', (req, res) => {
+   const index = req.params.guestid;
+    collection.update({}, {$unset : {"interests.3" : index }})
+    collection.update({}, {$pull : {"interests" : null}})
 });
 
 app.use(express.static(path.join(__dirname, 'public')));

@@ -35,7 +35,7 @@ class Header extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
                         <Nav.Link>Show all</Nav.Link>
-                        <Nav.Link onClick={this.props.LoginBtn}>{this.props.isLoggedIn ? "LogOut" : "Login"}</Nav.Link>
+                        <Nav.Link onClick={this.props.LoginBtn}>{this.props.isLoggedIn ? "Logout" : "Login"}</Nav.Link>
 
                     </Nav>
 
