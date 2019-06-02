@@ -60,7 +60,7 @@ class GuestBook extends Component {
         fetch('http://127.0.0.1:8080/delguest', {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({arr})
+            body: JSON.stringify(data[0])
         }).then((res) => {
             if(res){
                 data.splice(id, 1);

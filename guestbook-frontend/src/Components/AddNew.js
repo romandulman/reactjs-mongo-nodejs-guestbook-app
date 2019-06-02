@@ -16,6 +16,7 @@ class AddNew extends Component {
     handleClose = () => {
         this.setState({show: false});
     };
+
     handleAdd = () => {
         this.handleClose();
         this.props.addHandler(this.state.Name, this.state.Body) // here we sends inputs the imputs
