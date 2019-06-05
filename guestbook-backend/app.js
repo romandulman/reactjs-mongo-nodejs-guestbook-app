@@ -9,13 +9,15 @@ let logger = require('morgan');
 let path = require('path');
 let cors = require('cors');
 let mongoose = require('mongoose');
+let passport = require('passport');
+let Strategy = require('passport-local').Strategy;
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-mongoose.connect('mongodb://172.17.0.2:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
+mongoose.connect('mongodb://192.168.2.13:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
 
 let userSchema = mongoose.Schema({
     Name: String,

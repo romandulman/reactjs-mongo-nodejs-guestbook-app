@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './Styles.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Login from './Login'
+
 import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
@@ -40,6 +42,8 @@ class Header extends Component {
                     </Nav>
 
                 </Navbar.Collapse>
+                <Login/>
+
             </Navbar>
         );
     }
