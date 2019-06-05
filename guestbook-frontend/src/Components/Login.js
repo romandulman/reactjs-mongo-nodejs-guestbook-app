@@ -16,30 +16,36 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
-        LoginConfirm: () => dispach({type: "IsLoggedIn"}),
+        LoginConfirm: (name) => dispach({type: "IsLoggedIn", Name: name}),
         handleShowLogin: () => dispach({type: "LOGIN"})
 
     }
 };
+
+
 class Login extends Component {
 
+    userLogin = {
+        UserName: '',
+        Password: ''
+    };
 
 
     handleLogin = () => {
-       // this.handleClose();
+        this.props.LoginConfirm(this.userLogin.UserName)
+        // this.handleClose();
         fetch('http://127.0.0.1:8080/postguest', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({})
         }).then((res) => {
-            if(res){
+            if (res) {
 
 
             }
         });
 
     };
-
 
 
     render() {
@@ -53,16 +59,17 @@ class Login extends Component {
                     <Form>
                         <Form.Group>
                             <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" onChange={(e) => {
-                                this.setState({UserName: e.target.value})
-                            }} placeholder="Your Name"/>
+                            <Form.Control name="UserName" type="text" onChange={(e) => {
+                                this.userLogin.UserName = e.target.value
+                            }} placeholder="Your Username"/>
                         </Form.Group>
 
                         <Form.Group>
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" onChange={(e) => {
-                                this.setState({Password: e.target.value})
-                            }} placeholder="Your Password"/>
+                            <Form.Control name="UserName" type="password" onChange={(e) => {
+                                this.userLogin.Password = e.target.value
+                            }}
+                                          placeholder="Your Password"/>
                         </Form.Group>
                     </Form>
 

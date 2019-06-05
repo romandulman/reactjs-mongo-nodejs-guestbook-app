@@ -18,7 +18,7 @@ const reducer = (state = initState, action) => {
     let newState = {...state};
     switch (action.type) {
         case "LOGIN":
-           // newState.isLoggedIn = !state.isLoggedIn
+
             newState.showLogin = !state.showLogin;
             break;
 

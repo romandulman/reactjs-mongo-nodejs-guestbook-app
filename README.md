@@ -6,7 +6,8 @@ Gusetbook App - Mongo DB + Node.JS Backend and React.JS frontend, Docker and Jen
 #### This Example project implements:
 
 - Node.JS as backend with express, rest api and Mongoose
-- React.JS & Redux as frontend 
+- React.JS & Redux as frontend
+- Auth With Passport.JS
 - Unit tests both in frontend & backend (Mocha, Chai, Chai-HTTP, Jest)
 - Load & Performance tests
 - Selenium UI tests with Node.JS
