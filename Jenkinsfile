@@ -56,7 +56,7 @@ pipeline {
     stage('UI Tests'){
      /* Run Selenium test  */
       steps{
-        sh ''
+        sh 'cd selenium-test && npm test1'
       }
      }
     stage('Load Tests'){
