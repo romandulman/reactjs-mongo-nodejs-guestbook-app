@@ -2,7 +2,14 @@ import React, {Component} from 'react';
 import './Styles.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
+import {connect} from 'react-redux'
 
+
+const mapStateToProps = (state) => {
+    return {
+        showDeleteBtn: state.showDeleteBtn
+    }
+};
 class Guest extends Component {
 
     handleRemove = () => {
@@ -22,7 +29,7 @@ class Guest extends Component {
                             Best Regards, <cite title="Source Title">{this.props.guestName}</cite>
                         </footer>
                         <br/>
-                        <Button variant="outline-danger" onClick={this.handleRemove}>Remove Guest</Button>
+                        {this.props.showDeleteBtn &&  <Button variant="outline-danger" onClick={this.handleRemove}>Remove Guest</Button>}
                     </blockquote>
                 </Card.Body>
             </Card>
@@ -30,4 +37,4 @@ class Guest extends Component {
     }
 }
 
-export default Guest;
+export default connect(mapStateToProps)(Guest);

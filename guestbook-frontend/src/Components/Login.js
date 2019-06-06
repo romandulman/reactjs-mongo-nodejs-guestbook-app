@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
-        LoginConfirm: (name) => dispach({type: "IsLoggedIn", Name: name}),
+        LoginConfirm: (name) => dispach({type: "IsLoggedIn", LoggedUserName: name}),
         handleShowLogin: () => dispach({type: "LOGIN"})
 
     }
@@ -32,15 +32,18 @@ class Login extends Component {
 
 
     handleLogin = () => {
-        this.props.LoginConfirm(this.userLogin.UserName)
-        // this.handleClose();
-        fetch('http://127.0.0.1:8080/postguest', {
+        this.props.LoginConfirm(this.userLogin.UserName);
+        fetch('http://127.0.0.1:8080/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({})
+            body: JSON.stringify({
+                username: this.userLogin.UserName,
+                password: this.userLogin.Password
+            })
+
         }).then((res) => {
             if (res) {
-
+                alert(JSON.stringify(res))
 
             }
         });

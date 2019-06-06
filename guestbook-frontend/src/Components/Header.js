@@ -8,7 +8,8 @@ import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
     return {
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.isLoggedIn,
+        LoggedUserName: state.LoggedUserName
     }
 };
 
@@ -22,11 +23,9 @@ const mapDispachToProps = (dispach) => {
 
 class Header extends Component {
 
-
     addGuestHandler = () => {
         this.props.guestHandler();
     };
-
 
     render() {
         return (
@@ -38,9 +37,8 @@ class Header extends Component {
                         <Nav.Link onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
                         <Nav.Link>Show all</Nav.Link>
                         <Nav.Link onClick={this.props.LoginBtn}>{this.props.isLoggedIn ? "Logout" : "Login"}</Nav.Link>
-
                     </Nav>
-
+                    <Nav.Item> <h5 className='hiText'> {this.props.isLoggedIn ? "Hi " + this.props.LoggedUserName +" !" : ""}</h5> </Nav.Item>
                 </Navbar.Collapse>
                 <Login/>
 

@@ -1,5 +1,6 @@
 const initState = {
     isLoggedIn: false,
+    showDeleteBtn: false,
     showLogin: false,
     data: [
         {
@@ -7,8 +8,8 @@ const initState = {
             Body: ''
         }
     ],
-    UserName:'',
-    Password:'',
+    LoggedUserName: '',
+    Password: '',
 
 
 };
@@ -18,12 +19,20 @@ const reducer = (state = initState, action) => {
     let newState = {...state};
     switch (action.type) {
         case "LOGIN":
-
-            newState.showLogin = !state.showLogin;
+            if (!state.isLoggedIn) {
+                newState.showLogin = !state.showLogin;
+            }
+            else {
+                newState.isLoggedIn = false;
+                newState.showDeleteBtn = false;
+            }
             break;
 
         case "IsLoggedIn":
             newState.isLoggedIn = !state.isLoggedIn;
+            newState.showDeleteBtn = true;
+            newState.showLogin = false;
+            newState.LoggedUserName = action.LoggedUserName;
             break;
 
     }

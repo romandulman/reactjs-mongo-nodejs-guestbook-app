@@ -35,6 +35,67 @@ db.once('open', () => {
     });
 });
 
+passport.use(new Strategy(
+    function (username, password, cb) {
+        /*db.users.findByUsername(username, function (err, user) {
+            if (err) {
+                return cb(err);
+            }
+            if (!user) {
+                return cb(null, false);
+            }
+            if (user.password != password) {
+                return cb(null, false);
+            }
+            return cb(null, user);
+        });*/
+
+        if( 'admin' == username ){
+            console.log('okkkk')
+            return cb(username)
+
+        }
+
+    }));
+
+
+/*passport.serializeUser(function (user, cb) {
+    cb(null, user.id);
+});
+
+passport.deserializeUser(function (id, cb) {
+    db.users.findById(id, function (err, user) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, user);
+    });
+});*/
+
+
+app.post('/login',
+    passport.authenticate('local', {failureRedirect: '/failure'}),
+    function (req, res) {
+        res.send('ok');
+        console.log('redt')
+    });
+
+
+/*app.post('/login', (req, res) => {
+    let userLogin = {
+        Name: req.body.UserName,
+        Body: req.body.Password
+    };
+    passport.authenticate('local', {failureRedirect: '/failure'}),
+        function (req, res) {
+            res.redirect('/');
+
+    //collection.find().toArray(function (err, guests) {
+      // (err) ? console.log(err) : res.send('ok')
+  //  });
+console.log(userLogin)
+
+});*/
 
 app.get('/guests', (req, res) => {
     collection.find().toArray(function (err, guests) {
