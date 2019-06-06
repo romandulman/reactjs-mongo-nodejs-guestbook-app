@@ -63,6 +63,8 @@ pipeline {
      steps{
      /* Load tests */
       sh 'artillery quick --count 20 -n 20 http://127.0.0.1:8080/guests'
+      sh 'artillery quick --count 20 -n 20 http://127.0.0.1:8080/login'
+
      }
     }
     stage('Publish Artifacts'){
