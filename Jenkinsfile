@@ -16,6 +16,8 @@ pipeline {
         parallel (
           node: { sh "npm -v" },
           docker: { sh "docker -v" }
+          artillery { sh "artillery -v" }
+
         )
       }
     }
@@ -60,7 +62,7 @@ pipeline {
     stage('Load Tests'){
      steps{
      /* Load tests */
-      sh ''
+      sh 'artillery quick --count 20 -n 20 http://127.0.0.1:8080/guests'
      }
     }
     stage('Publish Artifacts'){
