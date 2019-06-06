@@ -16,7 +16,7 @@ pipeline {
         parallel (
           node: { sh "npm -v" },
           docker: { sh "docker -v" },
-          artillery: { sh "artillery -v" }
+          artillery: { sh "artillery -V" }
 
         )
       }
