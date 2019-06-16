@@ -30,19 +30,6 @@ mongoose.connect(keys.MongoDB.dbURL, () =>{
     console.log('mongo connected')
 });
 
-app.get('/guests/:name', (req, res) => {
-    collection.find({Name: req.params.name}).toArray((err, guests) => {
-        (!guests || guests.length <= 0) ?  res.status(404).json({
-            message: "Guest record not found",
-        }) : res.send(guests[0])
-    })
-});
-
-app.delete('/delguest/:guestid', (req, res) => {
-   const index = req.params.guestid;
-    collection.update({}, {$unset : {"interests.3" : index }})
-    collection.update({}, {$pull : {"interests" : null}})
-});
 
 app.use(express.static(path.join(__dirname, 'public')));
 
