@@ -30,6 +30,41 @@ mongoose.connect(keys.MongoDB.dbURL, () =>{
     console.log('mongo connected')
 });
 
+
+
+
+/*
+app.post('/login',
+    passport.authenticate('local', {failureRedirect: '/failure'}),
+    function (req, res) {
+        res.send('ok');
+        console.log('redt')
+    });
+*/
+
+
+/*app.post('/login', (req, res) => {
+    let userLogin = {
+        Name: req.body.UserName,
+        Body: req.body.Password
+    };
+    passport.authenticate('local', {failureRedirect: '/failure'}),
+        function (req, res) {
+            res.redirect('/');
+
+    //collection.find().toArray(function (err, guests) {
+      // (err) ? console.log(err) : res.send('ok')
+  //  });
+console.log(userLogin)
+
+});*/
+/*
+app.get('/guests', (req, res) => {
+    collection.find().toArray(function (err, guests) {
+        (err) ? console.log(err) : res.send(Object.values(guests))
+    });
+});
+*/
 app.get('/guests/:name', (req, res) => {
     collection.find({Name: req.params.name}).toArray((err, guests) => {
         (!guests || guests.length <= 0) ?  res.status(404).json({
@@ -38,6 +73,18 @@ app.get('/guests/:name', (req, res) => {
     })
 });
 
+/*app.post('/postguest', (req, res) => {
+    console.log(req.body);
+    let doc = {
+        Name: req.body.arr.Name,
+        Body: req.body.arr.Body
+    };
+    collection.insertOne(doc, (error, response) => {
+        (error) ? console.log(error) : res.send(response);
+        console.log(error)
+    });
+});
+*/
 app.delete('/delguest/:guestid', (req, res) => {
    const index = req.params.guestid;
     collection.update({}, {$unset : {"interests.3" : index }})
