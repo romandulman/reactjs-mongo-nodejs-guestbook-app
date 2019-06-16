@@ -6,20 +6,21 @@ const Guest = require('../models/guests-model');
 router.get('/guests', (req, res) => {
     Guest.find({})
         .then((AllGuests) => {
-        if (AllGuests) {
-            console.log('user is: ' + AllGuests);
-            res.send(Object.values(AllGuests))
-        }
-    })
+            if (AllGuests) {
+                console.log('user is: ' + AllGuests);
+                res.send(Object.values(AllGuests))
+            }
+        })
 });
 
 router.get('/guests/:name', (req, res) => {
     Guest.find({
-        Name: req.name
+        Name: req.params.name
     })
+
         .then((specGuest) => {
             console.log('user is: ' + specGuest);
-
+            res.send(specGuest)
         })
 
 });
