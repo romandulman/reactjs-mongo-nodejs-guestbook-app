@@ -26,7 +26,7 @@ app.use('/auth', authRoutes);
 app.use('/', indexRoutes);
 
 //mongoose.connect('mongodb://192.168.2.13:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
-mongoose.connect(keys.MongoDB.dbURL, () =>{
+mongoose.connect(keys.authMongoDB.dbURL, () =>{
     console.log('mongo connected')
 });
 
