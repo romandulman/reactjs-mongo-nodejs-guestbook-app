@@ -59,7 +59,7 @@ pipeline {
     stage('UI Tests'){
      /* Run Selenium test  */
       steps{
-        sh 'cd selenium-test && node test1'
+        sh 'cd guestbook-frontend && npm run seleniumtest'
       }
      }
     stage('Load Tests'){
