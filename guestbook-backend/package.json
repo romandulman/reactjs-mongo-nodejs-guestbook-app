@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./app.js",
-    "test": "mocha --timeout 15000 --require @babel/register Test/app.test.js --exit",
+    "test": "mocha --timeout 15000 --require @babel/register Test/app.test.js --reporter mocha-sonarqube-reporter --reporter-options output=xunit.xml --exit",
     "stop": "killall -SIGINT nodejs-guestbook"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "@babel/register": "^7.4.4",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
+    "mocha-sonarqube-reporter": "^1.0.1",
     "nodemon": "^1.19.0"
   }
 }
