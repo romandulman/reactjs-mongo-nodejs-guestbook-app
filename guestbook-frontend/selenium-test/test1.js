@@ -7,7 +7,7 @@ let driver = new Builder()
     .forBrowser('chrome')
     .usingServer('http://192.168.2.12:4444/wd/hub') /// Selenium grid server ip/domain
     .build();
-driver.get('http://192.168.1.13:3000')
+driver.get('http://192.168.2.13:8080')
     .then(_ =>
 //  driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN))
         driver.findElement(By.name('modalOk')).click())
