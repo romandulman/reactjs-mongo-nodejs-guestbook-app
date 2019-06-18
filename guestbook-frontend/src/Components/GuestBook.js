@@ -50,7 +50,6 @@ class GuestBook extends Component {
                    //     error
                   //  });
 
-                    alert('Error connecting server')
                 }
             )
     }

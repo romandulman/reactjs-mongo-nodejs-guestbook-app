@@ -43,7 +43,7 @@ class Login extends Component {
 
         }).then((res) => {
             if (res) {
-                alert(JSON.stringify(res))
+               console.log(JSON.stringify(res))
 
             }
         });
