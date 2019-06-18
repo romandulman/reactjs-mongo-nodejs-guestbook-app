@@ -43,12 +43,14 @@ pipeline {
 
     stage('Build Docker image'){
      steps{
+        sh 'docker rmi guestbook:latest'
         sh 'cd guestbook-frontend && npm  run build'
         sh 'docker build -t guestbook .'
      }
     }
     stage('Run Docker container'){
      steps{
+        sh 'docker rm guestbook_app'
         sh 'docker run  -d --name guestbook_app -p 8080:8080 guestbook '
      }
     }
@@ -56,7 +58,7 @@ pipeline {
     stage('UI Tests'){
      /* Run Selenium test  */
       steps{
-        sh 'cd selenium-test && npm test1'
+        sh 'cd selenium-test && node test1'
       }
      }
     stage('Load Tests'){
