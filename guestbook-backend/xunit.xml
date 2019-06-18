@@ -1,6 +1,6 @@
 <testExecutions version="1">
 <file path="Test\app.test.js">
-<testCase name="GET /guests: should get all Guests record" duration="225"/>
+<testCase name="GET /guests: should get all Guests record" duration="99"/>
 <testCase name="GET /guests: should get a single Guest record" duration="0">
 <failure message="expected [] to be an object"><![CDATA[AssertionError: expected [] to be an object
     at a (Test/app.test.js:28:40)
