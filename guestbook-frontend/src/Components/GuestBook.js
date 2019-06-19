@@ -25,12 +25,13 @@ class GuestBook extends Component {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({arr})
-        }).then((res) => {
-            if(res){
+
+        })  .then(response => response.json())
+            .then(res => {
             this.setState({
-                data: [...this.state.data, arr]
+                data: [...this.state.data, res]
             });
-            }
+                console.log(res)
         });
     };
 
@@ -55,11 +56,13 @@ class GuestBook extends Component {
     }
 
     RemoveHandler = (id) => {
+
         const data = this.state.data;
-        fetch('http://127.0.0.1:8080/delguest', {
+        fetch('http://127.0.0.1:8080/delguest/'+id , {
             method: 'DELETE',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data[0])
+            headers: {'Content-Type': 'application/json'}
+        //    body: JSON.stringify(data[0])
+
         }).then((res) => {
             if(res){
                 data.splice(id, 1);
@@ -71,8 +74,8 @@ class GuestBook extends Component {
     };
 
     render() {
-        const ViewGuests = this.state.data.map((guest, index) =>
-            <Col sm={4}> <Guest  RemoveHandler={this.RemoveHandler} Id={index}
+        const ViewGuests = this.state.data.map((guest) =>
+            <Col sm={4}> <Guest  RemoveHandler={this.RemoveHandler} Id={guest._id}
                                 guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
         );
 

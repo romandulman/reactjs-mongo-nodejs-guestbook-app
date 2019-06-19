@@ -7,8 +7,9 @@ router.get('/guests', (req, res) => {
     Guest.find({})
         .then((AllGuests) => {
             if (AllGuests) {
-                console.log('user is: ' + AllGuests);
+            //    console.log('user is: ' + AllGuests);
                 res.send(Object.values(AllGuests))
+                console.log(AllGuests)
             }
         })
 });
@@ -20,7 +21,7 @@ router.get('/guests/:name', (req, res) => {
 
         .then((specGuest) => {
             console.log('user is: ' + specGuest);
-            res.send(specGuest)
+            res.send(specGuest[0]._id)
         })
 
 });
@@ -33,8 +34,24 @@ router.post('/postguest', (req, res) => {
     })
         .save()
         .then((newGuest) => {
-            console.log('new created: ' + newGuest)
+            console.log('new created: ' + newGuest);
             res.send(newGuest)
         })
 });
+
+
+router.delete('/delguest/:guestid', (req, res) => {
+    const index = req.params.guestid;
+    console.log('isssss   '+index);
+  Guest.deleteOne( {
+      _id: index
+  } ).then((deleted) => {
+      console.log(deleted)
+    })
+
+
+})
+
+
+
 module.exports = router;
