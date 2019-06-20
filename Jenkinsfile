@@ -56,7 +56,7 @@ pipeline {
       label 'host1-jenkins-dind-nodejs-slave'
    }
   }
- stage('Integration Tests'){
+ stage('Integration Tsts'){
          steps {
           sh 'cd guestbook-backend && npm install '
            sh 'cd guestbook-frontend && npm install '
