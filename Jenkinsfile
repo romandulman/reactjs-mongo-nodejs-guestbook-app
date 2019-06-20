@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Integrationd'){
          steps {
-         sh ‘ssh devadmin@192.168.2.15 ’
+         sh ‘ssh 192.168.2.15 ’
          }
        }
 
