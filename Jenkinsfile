@@ -23,7 +23,7 @@ pipeline {
     } */
     stage ('Ch') {
     agent {
-                  docker {
+                  node {
                     label 'Web-App-Test-Server-1'  // both label and image
                   }
 
