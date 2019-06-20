@@ -1,9 +1,11 @@
 pipeline {
-  agent {
+ /* agent {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
    }
   }
+  */
+   node('host3-jenkins-dind-nodejs-slave') {
 
   stages {
     stage ('Checkout Code') {
@@ -62,5 +64,6 @@ pipeline {
            sh 'cd guestbook-frontend && npm install '
          }
        }
+  }
   }
 }
