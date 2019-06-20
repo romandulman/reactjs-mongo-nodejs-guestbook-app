@@ -14,10 +14,10 @@ pipeline {
     }
 stage ('Ch') {
       steps{
-              sshagent(credentials : ['use-the-id-from-credential-generated-by-jenkins']) {
-                  sh 'ssh -o StrictHostKeyChecking=no user@hostname.com uptime'
-                  sh 'ssh -v user@hostname.com'
-                  sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+              sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
+                  sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
+                  sh 'ssh -v devadmin@192.168.2.15'
+                  sh 'docker --v'
               }
           }
     }
