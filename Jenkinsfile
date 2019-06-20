@@ -3,7 +3,7 @@ pipeline {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
    }
-  }
+
 
   stages {
     stage ('Checkout Code') {
@@ -12,11 +12,6 @@ pipeline {
 
       }
     }
-    stage('Integrationd'){
-         steps {
-         sh ‘ssh 192.168.2.15 ’
-         }
-       }
 
     stage('Unit Tests'){
       steps {
@@ -57,6 +52,6 @@ pipeline {
 
  /* QA & Test ENV */
 
-
+}
   }
 }
