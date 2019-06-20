@@ -10,9 +10,8 @@ pipeline {
 
   stages {
   agent {
-      node {
         label 'host3-jenkins-dind-nodejs-slave'
-     }
+
     }
     stage ('Checkout Code') {
       steps {
