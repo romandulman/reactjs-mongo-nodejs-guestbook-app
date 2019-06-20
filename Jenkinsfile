@@ -24,7 +24,7 @@ pipeline {
     stage ('Ch') {
     agent {
                   node {
-                    label 'Web-App-Test-Server-1'  // both label and image
+                    name 'Web-App-Test-Server-1'  // both label and image
                   }
 
 
