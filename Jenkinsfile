@@ -9,12 +9,7 @@ pipeline {
     stage ('Checkout Code') {
       steps {
         checkout scm
-        parallel (
-                  node: { sh "npm -v" },
-                  docker: { sh "docker -v" },
-                  artillery: { sh "artillery -V" }
-
-                )
+        
       }
     }
 
