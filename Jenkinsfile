@@ -12,29 +12,7 @@ pipeline {
 
       }
     }
-/*stage ('Ch') {
-      steps{
-              sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
-                  sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
-                  sh 'ssh -v devadmin@192.168.2.15'
-                  sh 'docker --version'
-              }
-          }
-    } */
-    stage ('Ch') {
-    agent {
-                  node {
-                    name 'Web-App-Test-Server-1'  // both label and image
-                  }
 
-
-                }
-                      steps {
-                                        sh 'docker --version'
-
-                      }
-
-        }
     stage('Unit Tests'){
       steps {
        sh 'cd guestbook-backend && npm install '
@@ -58,8 +36,8 @@ pipeline {
 
     stage('Integration Tests'){
          steps {
-          sh 'cd guestbook-backend && npm install '
-           sh 'cd guestbook-frontend && npm install '
+          sh 'cd guestbook-backend  '
+           sh 'cd guestbook-frontend  '
          }
        }
 
@@ -73,7 +51,15 @@ pipeline {
     }
 
  /* QA & Test ENV */
-
+stage ('Deploy Docker Image To Test Server') {
+      steps{
+              sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
+                  sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
+                  sh 'ssh -v devadmin@192.168.2.15'
+                  sh 'docker push 192.168.2.11:8082/guestbook:${env.BUILD_NUMBER}'
+              }
+          }
+    }
 
   }
 }
