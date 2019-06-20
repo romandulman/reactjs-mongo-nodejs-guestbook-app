@@ -22,6 +22,10 @@ pipeline {
     }
 
     stage('Unit Tests'){
+       agent {
+                label 'host3-jenkins-dind-nodejs-slave'
+
+            }
       steps {
        sh 'cd guestbook-backend && npm install '
         sh 'cd guestbook-frontend && npm install '
