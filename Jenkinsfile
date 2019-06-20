@@ -11,7 +11,7 @@ pipeline {
       node {
         label 'host3-jenkins-dind-nodejs-slave'
      }
-    } 
+    }
     stage ('Checkout Code') {
       steps {
         checkout scm
@@ -57,16 +57,6 @@ pipeline {
     }
 
  /* QA & Test ENV */
- agent {
-    node {
-      label 'host1-jenkins-dind-nodejs-slave'
-   }
-  }
- stage('Integration Tsts'){
-         steps {
-          sh 'cd guestbook-backend && npm install '
-           sh 'cd guestbook-frontend && npm install '
-         }
-       }
+ 
   }
 }
