@@ -1,31 +1,26 @@
 pipeline {
-    agent none
-
- /* agent {
+  agent {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
    }
   }
-  */
 
   stages {
-
     stage ('Checkout Code') {
-      agent {
-            label 'host3-jenkins-dind-nodejs-slave'
-
-        }
       steps {
         checkout scm
 
       }
     }
-
+ steps{
+        sshagent(credentials : ['use-the-id-from-credential-generated-by-jenkins']) {
+            sh 'ssh -o StrictHostKeyChecking=no user@hostname.com uptime'
+            sh 'ssh -v user@hostname.com'
+            sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+        }
+    }
+    }
     stage('Unit Tests'){
-       agent {
-                label 'host3-jenkins-dind-nodejs-slave'
-
-            }
       steps {
        sh 'cd guestbook-backend && npm install '
         sh 'cd guestbook-frontend && npm install '
@@ -63,6 +58,7 @@ pipeline {
     }
 
  /* QA & Test ENV */
+
 
   }
 }
