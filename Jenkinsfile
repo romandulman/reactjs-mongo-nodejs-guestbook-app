@@ -44,6 +44,7 @@ pipeline {
     stage('Build Docker Image & Publish'){
          /* Build Docker Image & Publish to Local Nexus Private Docker registry  */
      steps{
+        sh 'cd guestbook-frontend && npm  run build'
         sh 'docker build -t guestbook .'
         sh 'docker tag guestbook 192.168.2.11:8082/guestbook:${env.BUILD_NUMBER}'
         sh 'docker push 192.168.2.11:8082/guestbook:${env.BUILD_NUMBER}'
