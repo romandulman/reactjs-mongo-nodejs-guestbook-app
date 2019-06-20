@@ -9,9 +9,14 @@ pipeline {
     stage ('Checkout Code') {
       steps {
         checkout scm
-        
+
       }
     }
+    stage('Integrationd'){
+         steps {
+         sh ‘ssh devadmin@192.168.2.15 docker --v’
+         }
+       }
 
     stage('Unit Tests'){
       steps {
@@ -51,12 +56,6 @@ pipeline {
     }
 
  /* QA & Test ENV */
-     stage('Integrationd'){
-         steps {
-        sh ‘’
-
-         }
-       }
 
 
   }
