@@ -12,7 +12,7 @@ pipeline {
 
       }
     }
-stage ('Ch') {
+/*stage ('Ch') {
       steps{
               sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
                   sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
@@ -20,7 +20,14 @@ stage ('Ch') {
                   sh 'docker --version'
               }
           }
-    }
+    } */
+    stage ('Ch') {
+    node('Web-App-Test-Server-1'){
+          steps{
+                sh ' docker --v'
+              }
+        }
+        }
     stage('Unit Tests'){
       steps {
        sh 'cd guestbook-backend && npm install '
