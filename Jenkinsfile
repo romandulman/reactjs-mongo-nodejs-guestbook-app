@@ -1,14 +1,17 @@
 pipeline {
-agent any
  /* agent {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
    }
   }
   */
-   node('host3-jenkins-dind-nodejs-slave') {
 
   stages {
+  agent {
+      node {
+        label 'host3-jenkins-dind-nodejs-slave'
+     }
+    } 
     stage ('Checkout Code') {
       steps {
         checkout scm
@@ -65,6 +68,5 @@ agent any
            sh 'cd guestbook-frontend && npm install '
          }
        }
-  }
   }
 }
