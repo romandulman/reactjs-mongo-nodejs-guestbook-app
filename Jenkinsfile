@@ -12,9 +12,8 @@ pipeline {
 
     stage ('Checkout Code') {
       agent {
-          node {
             label 'host3-jenkins-dind-nodejs-slave'
-         }
+
         }
       steps {
         checkout scm
