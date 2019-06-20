@@ -1,4 +1,6 @@
 pipeline {
+    agent none
+
  /* agent {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
@@ -57,6 +59,6 @@ pipeline {
     }
 
  /* QA & Test ENV */
- 
+
   }
 }
