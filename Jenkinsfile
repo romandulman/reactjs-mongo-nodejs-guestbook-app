@@ -17,7 +17,7 @@ stage ('Ch') {
               sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
                   sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
                   sh 'ssh -v devadmin@192.168.2.15'
-                  sh 'docker -version'
+                  sh 'docker --version'
               }
           }
     }
