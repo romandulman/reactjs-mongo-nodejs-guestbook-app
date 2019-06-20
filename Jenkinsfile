@@ -46,8 +46,8 @@ pipeline {
      steps{
         sh 'cd guestbook-frontend && npm  run build'
         sh 'docker build -t guestbook .'
-        sh 'docker tag guestbook 192.168.2.11:8082/guestbook:${env.BUILD_NUMBER}'
-        sh 'docker push 192.168.2.11:8082/guestbook:${env.BUILD_NUMBER}'
+        sh 'docker tag guestbook:latest 192.168.2.11:8082/guestbook:1'
+        sh 'docker push 192.168.2.11:8082/guestbook:1'
      }
     }
 
