@@ -2,7 +2,8 @@ pipeline {
   agent {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
-
+   }
+  }
 
   stages {
     stage ('Checkout Code') {
@@ -56,8 +57,17 @@ pipeline {
 
  /* QA & Test ENV */
 
-    }
-  }
+ stage('Front-end') {
+             agent {
+               docker {
+                 name 'Web-App-Test-Server-1'  // both label and image
+                 image 'node:7-alpine'
+               }
+             }
+             steps {
+                 sh 'node --version'
+             }
+         }
 
   }
 }
