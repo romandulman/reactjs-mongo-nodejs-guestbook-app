@@ -2,31 +2,28 @@ pipeline {
   agent {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
-    }
-  }
+
 
   stages {
     stage ('Checkout Code') {
       steps {
         checkout scm
-      }
-    }
-    stage ('Verify Tools'){
-      steps {
         parallel (
-          node: { sh "npm -v" },
-          docker: { sh "docker -v" },
-          artillery: { sh "artillery -V" }
+                  node: { sh "npm -v" },
+                  docker: { sh "docker -v" },
+                  artillery: { sh "artillery -V" }
 
-        )
+                )
       }
     }
+
     stage('Unit Tests'){
       steps {
        sh 'cd guestbook-backend && npm install '
         sh 'cd guestbook-frontend && npm install '
       }
     }
+
     stage('Static Code Analysis'){
         environment {
             scannerHome = tool 'SonarQubeScanner'
@@ -41,40 +38,26 @@ pipeline {
       }
     }
 
-    stage('Build Docker image'){
+    stage('Integration Tests'){
+         steps {
+          sh 'cd guestbook-backend && npm install '
+           sh 'cd guestbook-frontend && npm install '
+         }
+       }
+
+    stage('Build Docker Image & Publish'){
+         /* Build Docker Image & Publish to Local Nexus Private Docker registry  */
      steps{
-        sh 'docker stop guestbook_app '
-        sh 'docker rm guestbook_app'
-        sh 'docker rmi guestbook:latest'
-        sh 'cd guestbook-frontend && npm  run build'
         sh 'docker build -t guestbook .'
-     }
-    }
-    stage('Run Docker container'){
-     steps{
-        sh 'docker run  -d --name guestbook_app -p 8080:8080 guestbook '
+        sh 'docker tag guestbook 192.168.2.11:8082/guestbook:${env.BUILD_NUMBER}'
+        sh 'docker push 192.168.2.11:8082/guestbook:${env.BUILD_NUMBER}'
      }
     }
 
-    stage('UI Tests'){
-     /* Run Selenium test  */
-      steps{
-        sh 'cd guestbook-frontend && npm run seleniumtest'
-      }
-     }
-    stage('Load Tests'){
-     steps{
-     /* Load tests */
-      sh 'artillery quick --count 20 -n 20 http://127.0.0.1:8080/guests'
-      sh 'artillery quick --count 20 -n 20 http://127.0.0.1:8080/login'
+ /* QA & Test ENV */
 
-     }
     }
-    stage('Publish Artifacts'){
-     steps{
-     /* Publish artifacts to Nexus private docker registry */
-       sh ''
-     }
-    }
+  }
+
   }
 }
