@@ -56,18 +56,13 @@ pipeline {
     }
 
  /* QA & Test ENV */
+ stage('Integrationd'){
+         steps {
+        sh ‘ssh devadmin@192.168.2.15 docker -version’
 
- stage('Front-end') {
-             agent {
-               docker {
-                 name 'Web-App-Test-Server-1'  // both label and image
-                 image 'node:7-alpine'
-               }
-             }
-             steps {
-                 sh 'node --version'
-             }
          }
+       }
+
 
   }
 }
