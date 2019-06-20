@@ -57,8 +57,8 @@ stage ('Deploy Docker Image To Test Server') {
       steps{
               sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
                   sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
-                  sh 'ssh -v devadmin@192.168.2.15'
-                  sh 'ssh docker pull 192.168.2.11:8082/guestbook:1'
+                  sh 'ssh -v devadmin@192.168.2.15 docker pull 192.168.2.11:8082/guestbook:1'
+                  
               }
           }
     }
