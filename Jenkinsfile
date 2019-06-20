@@ -22,11 +22,18 @@ pipeline {
           }
     } */
     stage ('Ch') {
-    node('Web-App-Test-Server-1'){
-          steps{
-                sh ' docker --v'
-              }
-        }
+    agent {
+                  docker {
+                    label 'Web-App-Test-Server-1'  // both label and image
+                  }
+
+
+                }
+                      steps {
+                                        sh 'docker --version'
+
+                      }
+
         }
     stage('Unit Tests'){
       steps {
