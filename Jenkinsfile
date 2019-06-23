@@ -58,7 +58,7 @@ pipeline {
           }
 
     stage('Build Docker Image & Publish'){
-      * Build Docker Image & Publish to Nexus Local  Private Docker registry  */
+      /* Build Docker Image & Publish to Nexus Local  Private Docker registry  */
          steps{
              script {
                dockerImage = docker.build registry + ":$BUILD_NUMBER"
