@@ -2,7 +2,7 @@ pipeline {
    environment {
              registry = '192.168.2.11:8082/guestbook'
              registryCredential = 'localdockerreg'
-             registyAddr '192.168.2.11:8082'
+             registyAddr = '192.168.2.11:8082'
              dockerImage = ''
              scannerHome = tool 'SonarQubeScanner'
    }
