@@ -18,13 +18,21 @@ pipeline {
       }
     }
 
-    stage('Build Docker Image & Publish'){
+    stage('Build Frontend'){
              /* Build Docker Image & Publish to Local Nexus Private Docker registry  */
 
 
          steps{
         sh 'cd guestbook-frontend && npm  run build'
-sh' cd ..'
+
+         }
+        }
+
+    stage('Build Docker Image & Publish'){
+             /* Build Docker Image & Publish to Local Nexus Private Docker registry  */
+
+
+         steps{
           script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
           docker.withRegistry( '', registryCredential ) {
