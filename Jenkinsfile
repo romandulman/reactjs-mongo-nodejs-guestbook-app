@@ -35,7 +35,7 @@ pipeline {
          steps{
           script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
-          docker.withRegistry( '192.168.2.11:8082', registryCredential ) {
+          docker.withRegistry( 'http://192.168.2.11:8082', registryCredential ) {
                       dockerImage.push()
                       }
                  }
