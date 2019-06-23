@@ -2,7 +2,7 @@ const Guest = require('../models/guests-model');
 
 class guestCtl {
 
-    addGuest  = (req, res) => {
+    addGuest = (req, res) => {
         new Guest({
             Name: req.body.arr.Name,
             Body: req.body.arr.Body
@@ -15,7 +15,7 @@ class guestCtl {
             })
     };
 
-    loadAllGuets = (req,res) =>{
+    loadAllGuets = (req, res) => {
         Guest.find({})
             .then((AllGuests) => {
                 if (AllGuests) {
@@ -26,14 +26,10 @@ class guestCtl {
             })
     };
 
-    deleteGuest = (req,res) =>{
-
-
+    deleteGuest = (req, res) => {
 
 
     };
-
-
 };
 
-module.exports = new  guestCtl;
+module.exports = new guestCtl;
