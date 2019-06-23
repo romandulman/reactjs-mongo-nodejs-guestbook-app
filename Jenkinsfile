@@ -1,4 +1,9 @@
 pipeline {
+   environment {
+             registry = "192.168.2.11:8082/guestbook"
+             registryCredential = 'localdockerreg'
+             dockerImage = ''
+          }
   agent {
     node {
       label 'host3-jenkins-dind-nodejs-slave'
@@ -12,6 +17,19 @@ pipeline {
 
       }
     }
+
+    stage('Build Docker Image & Publish'){
+             /* Build Docker Image & Publish to Local Nexus Private Docker registry  */
+
+
+         steps{
+            sh 'cd guestbook-frontend && npm  run build'
+          script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                 }
+         }
+        }
+
 
     stage('Unit Tests'){
       steps {
@@ -41,16 +59,7 @@ pipeline {
          }
        }
 
-    stage('Build Docker Image & Publish'){
-         /* Build Docker Image & Publish to Local Nexus Private Docker registry  */
-     steps{
-        sh 'cd guestbook-frontend && npm  run build'
-        sh 'docker build -t guestbook .'
-        sh 'docker login 192.168.2.11:8082 --username admin --password Logic41734173!'
-        sh 'docker tag guestbook:latest 192.168.2.11:8082/guestbook:1'
-        sh 'docker push 192.168.2.11:8082/guestbook:1'
-     }
-    }
+
 
  /* QA & Test ENV */
 stage ('Deploy Docker Image To Test Server') {
