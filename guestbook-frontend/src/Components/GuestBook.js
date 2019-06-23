@@ -67,8 +67,7 @@ class GuestBook extends Component {
             .then(res => res.json())
             .then(response => {
                 alert(response._id)
-
-                data.filter(guest => guest._id == id);
+             let filData  =  data.filter(guest => guest._id == id);
                 this.setState({
                     data: data
                 });
