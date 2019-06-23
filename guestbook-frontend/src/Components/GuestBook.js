@@ -63,13 +63,16 @@ class GuestBook extends Component {
             headers: {'Content-Type': 'application/json'}
         //    body: JSON.stringify(data[0])
 
-        }).then((res) => {
-            if(res){
-                data.splice(id, 1);
+        })
+            .then(res => res.json())
+            .then(response => {
+                alert(response._id)
+
+                data.filter(guest => guest._id == id);
                 this.setState({
                     data: data
                 });
-            }
+
         });
     };
 

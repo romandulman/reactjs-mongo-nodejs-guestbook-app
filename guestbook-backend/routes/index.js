@@ -1,17 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Guest = require('../models/guests-model');
-
+const guestCtl = require('../controllers/guestCtl')
 
 router.get('/guests', (req, res) => {
-    Guest.find({})
-        .then((AllGuests) => {
-            if (AllGuests) {
-            //    console.log('user is: ' + AllGuests);
-                res.send(Object.values(AllGuests))
-                console.log(AllGuests)
-            }
-        })
+    guestCtl.loadAllGuets(req,res)
+
 });
 
 router.get('/guests/:name', (req, res) => {
@@ -27,30 +21,19 @@ router.get('/guests/:name', (req, res) => {
 });
 
 router.post('/postguest', (req, res) => {
-    new Guest({
-        Name: req.body.arr.Name,
-        Body: req.body.arr.Body
-
-    })
-        .save()
-        .then((newGuest) => {
-            console.log('new created: ' + newGuest);
-            res.send(newGuest)
-        })
+    guestCtl.addGuest(req,res)
 });
 
 
 router.delete('/delguest/:guestid', (req, res) => {
-    const index = req.params.guestid;
-    console.log('isssss   '+index);
-  Guest.deleteOne( {
-      _id: index
-  } ).then((deleted) => {
-      console.log(deleted)
+    //.deleteGuest(req,res)
+    console.log(req.params.guestid)
+    Guest.deleteOne( {
+        _id: req.params.guestid
+    }).then((deleted) => {
+        res.send(deleted)
     })
-
-
-})
+});
 
 
 
