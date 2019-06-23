@@ -23,7 +23,7 @@ pipeline {
 
 
          steps{
-        sh 'cd guestbook-frontend && npm  run build'
+        sh 'cd guestbook-frontend && npm install && npm  run build'
 
          }
         }
