@@ -23,10 +23,10 @@ pipeline {
 
 
          steps{
-            sh 'cd guestbook-frontend && npm  run build'
+          
           script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
-          docker.withRegistry( '', registryCredntial ) {
+          docker.withRegistry( '', registryCredential ) {
                       dockerImage.push()
                       }
                  }
