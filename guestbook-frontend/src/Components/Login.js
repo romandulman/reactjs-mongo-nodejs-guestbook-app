@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
+
         LoginConfirm: (name) => dispach({type: "IsLoggedIn", LoggedUserName: name}),
         handleShowLogin: () => dispach({type: "LOGIN"})
 
@@ -50,6 +51,9 @@ class Login extends Component {
 
     };
 
+    handleGoogleLogin = () => {
+        window.open("http://127.0.0.1:8080/auth/google", "_self");
+    };
 
     render() {
         return (
@@ -58,7 +62,13 @@ class Login extends Component {
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <Button className="loginBtn loginBtn--facebook">
+                        Login with Facebook
+                    </Button>
 
+                    <Button onClick={this.handleGoogleLogin} className="loginBtn loginBtn--google">
+                        Login with Google
+                    </Button>
                     <Form>
                         <Form.Group>
                             <Form.Label>Username</Form.Label>

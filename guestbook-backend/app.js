@@ -4,36 +4,72 @@
 let express = require('express');
 let app = express();
 let cookieParser = require('cookie-parser');
-let createError = require('http-errors');
-let logger = require('morgan');
-let path = require('path');
-let cors = require('cors');
-let mongoose = require('mongoose');
-let passport = require('passport');
-let Strategy = require('passport-local').Strategy;
+const cookieSession = require("cookie-session");
+const session = require("express-session");
+const createError = require('http-errors');
+const logger = require('morgan');
+const path = require('path');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
 const authRoutes = require('./routes/auth-routes');
 const indexRoutes = require('./routes/index');
 const keys = require('./config/keys');
 require('./config/passport-config');
-app.use(cors());
+
+mongoose.connect(keys.authMongoDB.dbURL, () =>{
+    console.log('mongo connected')
+});
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true
+}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(
+    cookieSession({
+        name: "session",
+        keys: [keys.COOKIE_KEY],
+        maxAge: 24 * 60 * 60 * 100
+    })
+);
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRoutes);
 app.use('/', indexRoutes);
 
-//mongoose.connect('mongodb://192.168.2.13:27017/testdb', {useNewUrlParser: true}); // local dev mongodb container/instance
-mongoose.connect(keys.authMongoDB.dbURL, () =>{
-    console.log('mongo connected')
-});
-
-
 app.use(express.static(path.join(__dirname, 'public', )));
-app.get('/', function(req, res) {
+
+const authCheck = (req, res, next) => {
+    if (!req.user) {
+        res.status(401).json({
+            authenticated: false,
+            message: "user has not been authenticated"
+        });
+    } else {
+        next();
+    }
+};
+
+
+
+/*app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+}); */
+
+app.get("/", authCheck, (req, res) => {
+    res.status(200).json({
+        authenticated: true,
+        message: "user successfully authenticated",
+        user: req.user,
+        cookies: req.cookies
+    });
 });
 
 app.use((req, res, next) => {

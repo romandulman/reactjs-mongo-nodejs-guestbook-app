@@ -61,15 +61,13 @@ class GuestBook extends Component {
         fetch('http://127.0.0.1:8080/delguest/'+id , {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
-        //    body: JSON.stringify(data[0])
 
         })
             .then(res => res.json())
-            .then(response => {
-                alert(response._id)
-             let filData  =  data.filter(guest => guest._id == id);
+            .then((res) => {
+             let  newData = data.filter(guest => guest._id !== id);
                 this.setState({
-                    data: data
+                    data: newData
                 });
 
         });

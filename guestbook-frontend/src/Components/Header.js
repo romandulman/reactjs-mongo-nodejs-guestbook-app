@@ -30,13 +30,13 @@ class Header extends Component {
     render() {
         return (
             <Navbar className='fixed-top' collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand>Guestbook</Navbar.Brand>
+                <Navbar.Brand>Event Guestbook</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
                         <Nav.Link>Show all</Nav.Link>
-                        <Nav.Link onClick={this.props.LoginBtn}>{this.props.isLoggedIn ? "Logout" : "Login"}</Nav.Link>
+                        <Nav.Link onClick={this.props.LoginBtn}>{this.props.isLoggedIn ? "Logout" : "Admin area"}</Nav.Link>
                     </Nav>
                     <Nav.Item> <h5 className='hiText'> {this.props.isLoggedIn ? "Hi " + this.props.LoggedUserName +" !" : ""}</h5> </Nav.Item>
                 </Navbar.Collapse>
