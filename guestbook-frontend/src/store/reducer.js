@@ -52,7 +52,7 @@ const reducer = (state = initState, action) => {
 
     }
 
-    
+
     return newState
 };
 
