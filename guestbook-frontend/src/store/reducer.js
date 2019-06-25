@@ -2,7 +2,8 @@ const initState = {
     isLoggedIn: false,
     showDeleteBtn: false,
     showLogin: false,
-    data: [
+    showAddModal: false,
+    GuestsList: [
         {
             Name: '',
             Body: ''
@@ -18,6 +19,9 @@ const reducer = (state = initState, action) => {
 
     let newState = {...state};
     switch (action.type) {
+        case "SHOWMODAL":
+            newState.showAddModal = !state.showAddModal;
+            break;
         case "LOGIN":
             if (!state.isLoggedIn) {
                 newState.showLogin = !state.showLogin;
@@ -25,6 +29,10 @@ const reducer = (state = initState, action) => {
             else {
                 newState.isLoggedIn = false;
                 newState.showDeleteBtn = false;
+                if (state.isLoggedIn) {
+                    window.open("http://127.0.0.1:8080/auth/logout", "_self");
+
+                }
             }
             break;
 
@@ -34,8 +42,17 @@ const reducer = (state = initState, action) => {
             newState.showLogin = false;
             newState.LoggedUserName = action.LoggedUserName;
             break;
+        case "DATA":
+            newState.GuestsList = action.guestsData;
+            console.log(action.guestsData);
+            break;
+        case "ADD":
+            alert(action.addGuest.Name);
+            break;
 
     }
+
+    
     return newState
 };
 

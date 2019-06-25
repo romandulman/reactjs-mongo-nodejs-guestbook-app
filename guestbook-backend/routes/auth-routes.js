@@ -6,7 +6,25 @@ router.get('/login', (req, res) => {
     res.render('login', {title: 'Login'})
 });
 
+router.get("/login/success", (req, res) => {
+    if (req.user) {
+        res.json({
+            success: true,
+            message: "user has successfully authenticated",
+            user: req.user,
+            cookies: req.cookies
+        });
+        console.log('okkkkk')
+    }
+});
 
+// when login failed, send failed msg
+router.get("/login/failed", (req, res) => {
+    res.status(401).json({
+        success: false,
+        message: "user failed to authenticate."
+    });
+});
 router.get('/google',
     passport.authenticate('google', {
         scope: ['https://www.googleapis.com/auth/plus.login']
@@ -30,14 +48,18 @@ router.get('/google/redirect',
         failureRedirect: '/login',
         successRedirect: 'http://localhost:3000'
 
-    }),
-    (req, res) => {
-        res.send('ok');
+    })
+)
+
+   // (req, res) => {
+   //     res.send('ok');
+  //  });
+
+
+    router.get("/logout", (req, res) => {
+        req.logout();
+        res.redirect('http://localhost:3000');
     });
 
-
-router.get('/logout', (req, res) => {
-    res.redirect('/');
-});
 
 module.exports = router;

@@ -1,11 +1,10 @@
 //process.title = guestbook-backend;
 //process.title = process.argv[2];
 
-let express = require('express');
-let app = express();
-let cookieParser = require('cookie-parser');
+const express = require('express');
+const app = express();
+const cookieParser = require('cookie-parser');
 const cookieSession = require("cookie-session");
-const session = require("express-session");
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
@@ -22,25 +21,30 @@ mongoose.connect(keys.authMongoDB.dbURL, () =>{
     console.log('mongo connected')
 });
 
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+app.use(cookieSession({
+        maxAge: 24 * 60 * 60 * 1000,
+        keys: [keys.session.cookie_key],
+        name: 'guestbookAuth'
+
+    })
+);
+app.use(logger('dev'));
+
+app.use(cookieParser());
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(
-    cookieSession({
-        name: "session",
-        keys: [keys.COOKIE_KEY],
-        maxAge: 24 * 60 * 60 * 100
-    })
-);
-app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use('/auth', authRoutes);
 app.use('/', indexRoutes);
 

@@ -55,6 +55,7 @@ class Login extends Component {
         window.open("http://127.0.0.1:8080/auth/google", "_self");
     };
 
+
     render() {
         return (
             <Modal show={this.props.showLogin} onHide={this.props.handleShowLogin}>

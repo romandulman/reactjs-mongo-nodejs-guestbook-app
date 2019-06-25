@@ -16,15 +16,18 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
-        LoginBtn: () => dispach({type: "LOGIN"})
+        LoginBtn: () => dispach({type: "LOGIN"}),
+        ShowModal: () => dispach({type: "SHOWMODAL"}),
+
     }
 };
+
 
 
 class Header extends Component {
 
     addGuestHandler = () => {
-        this.props.guestHandler();
+        this.props.ShowModal();
     };
 
     render() {
