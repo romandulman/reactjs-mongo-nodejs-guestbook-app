@@ -24,29 +24,23 @@ let arr = {
     Name: '',
     Body: ''
 };
+
 class AddNew extends Component {
-/*
-    state = {
-        show: false,
-        Name: '',
-        Body: ''
-    };*/
 
-    addOne = (Name, Body) => {
+    setRef = webcam => {
+        this.webcam = webcam;
+    };
 
-
-
+    capture = () => {
+        const imageSrc = this.webcam.getScreenshot();
     };
 
     handleClose = () => {
-       // this.setState({show: false});
         this.props.ShowModal();
-
     };
 
     handleAdd = () => {
-        this.handleClose();
-      //  this.props.addHandler(this.state.Name, this.state.Body) // here we sends inputs the imputs
+        this.props.ShowModal();
         fetch('http://127.0.0.1:8080/postguest', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -54,53 +48,59 @@ class AddNew extends Component {
 
         }).then(response => response.json())
             .then(res => {
-
-                let AddnewData = [...this.props.GuestsList, res]
+                let AddnewData = [...this.props.GuestsList, res];
                 this.props.sendGuestsData(AddnewData)
-
-                console.log(res)
             });
-    };
-
-    handleShow = () => {
-        //this.setState({show: true});
-
     };
 
 
     render() {
+        const videoConstraints = {
+            width: 1280,
+            height: 720,
+            facingMode: "user"
+        };
+
         return (
-            <Modal show={this.props.showAddModal} onHide={this.handleClose}>
+            <Modal dialogClassName="modal-90w" show={this.props.showAddModal} onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New Guest</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-<Webcam/>
                     <Form>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group>
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="text" onChange={(e) => {
-
-                            //    this.setState({Name: e.target.value})
                                 arr.Name = e.target.value
-
                             }} placeholder="Your Name"/>
                         </Form.Group>
 
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Your Text....</Form.Label>
+                        <Form.Group>
+                            <Form.Label>Your Message</Form.Label>
                             <Form.Control as="textarea" onChange={(e) => {
-
-                               // this.setState({Body: e.target.value})
                                 arr.Body = e.target.value
-
-                                }} rows="3"/>
+                            }} rows="3"/>
                         </Form.Group>
                     </Form>
-
+                    <Form.Group>
+                    <h5>Smile to the Camera..</h5>
+                    <Webcam
+                        audio={false}
+                        height={550}
+                        ref={this.setRef}
+                        screenshotFormat="image/jpeg"
+                        width={550}
+                        videoConstraints={videoConstraints}
+                    />
+                    </Form.Group>
+                    <Form.Group>
+                    <Button variant="secondary" onClick={this.capture}>
+                        Take a Shoot
+                    </Button>
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
+                    <Button variant="secondary" onClick={this.props.ShowModal}>
                         Cancel
                     </Button>
                     <Button variant="primary" onClick={this.handleAdd}>

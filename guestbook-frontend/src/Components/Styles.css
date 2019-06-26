@@ -8,8 +8,14 @@
     color: white;
 
 }
+.modal-90w{
+
+    max-width: fit-content !important;
+}
+.Webcam{
 
 
+}
 
 body { padding: 2em; }
 
