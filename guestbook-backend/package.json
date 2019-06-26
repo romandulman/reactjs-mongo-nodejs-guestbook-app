@@ -5,7 +5,10 @@
   "scripts": {
     "start": "nodemon ./app.js",
     "test": "mocha  --timeout 15000  --require @babel/register  Test/app.test.js --exit",
-    "stop": "killall -SIGINT nodejs-guestbook"
+    "stop": "killall -SIGINT nodejs-guestbook",
+    "dis": "node ./app.js"
+
+
   },
   "dependencies": {
     "chai-http": "^4.3.0",

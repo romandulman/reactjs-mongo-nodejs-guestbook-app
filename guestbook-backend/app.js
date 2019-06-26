@@ -15,7 +15,7 @@ const Strategy = require('passport-local').Strategy;
 const authRoutes = require('./routes/auth-routes');
 const indexRoutes = require('./routes/index');
 const keys = require('./config/keys');
-require('./config/passport-config');
+const passportCtl = require('./controllers/passportCtl');
 
 mongoose.connect(keys.authMongoDB.dbURL, () =>{
     console.log('mongo connected')

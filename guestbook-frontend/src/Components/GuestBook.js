@@ -46,17 +46,18 @@ class GuestBook extends Component {
 
         }).then(response => response.json())
             .then(res => {
-                this.setState({
-                    data: [...this.state.data, res]
-                });
+
+                   let AddnewData = [...this.props.GuestsList, res]
+                this.props.sendGuestsData(AddnewData)
+
                 console.log(res)
             });
     };
 
 
     RemoveHandler = (id) => {
+       const data = this.props.GuestsList;
 
-        const data = this.state.data;
         fetch('http://127.0.0.1:8080/delguest/' + id, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
@@ -68,6 +69,8 @@ class GuestBook extends Component {
               /*  this.setState({
                     data: newData
                 });*/
+                this.props.sendGuestsData(newData)
+
 
             });
     };

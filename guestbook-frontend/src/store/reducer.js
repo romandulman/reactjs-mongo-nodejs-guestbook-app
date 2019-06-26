@@ -46,9 +46,6 @@ const reducer = (state = initState, action) => {
             newState.GuestsList = action.guestsData;
             console.log(action.guestsData);
             break;
-        case "ADD":
-            alert(action.addGuest.Name);
-            break;
 
     }
 
