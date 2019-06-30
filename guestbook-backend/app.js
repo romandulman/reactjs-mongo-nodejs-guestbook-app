@@ -4,7 +4,7 @@
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
-const cookieSession = require("cookie-session");
+const cookieSession = require("express-session");
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
@@ -25,8 +25,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use(cookieSession({
+        secret:'ssshhhh',
         maxAge: 24 * 60 * 60 * 1000,
-        keys: [keys.session.cookie_key],
+        secret: [keys.session.cookie_key],
         name: 'guestbookAuth'
 
     })
@@ -41,8 +42,7 @@ app.use(passport.session());
 
 app.use(cors({
     origin: 'http://localhost:3000',
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
 }));
 
 app.use('/auth', authRoutes);

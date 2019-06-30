@@ -3,10 +3,12 @@ const passport = require('passport');
 
 //login
 router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login' }),
-    function(req, res) {
-        res.redirect('/');
-    });
+    passport.authenticate('local', { failureRedirect: '/login'}),
+
+   (req, res) => {
+      //  res.redirect('http://localhost:3000');
+
+    })
 
 router.get("/login/success", (req, res) => {
     if (req.user) {
@@ -16,7 +18,6 @@ router.get("/login/success", (req, res) => {
             user: req.user,
             cookies: req.cookies
         });
-        console.log('okkkkk')
     }
 });
 
@@ -39,7 +40,9 @@ router.get('/facebook',
     }));
 
 router.get('/facebook/callback',
-    passport.authenticate('facebook', {failureRedirect: '/login'}),
+    passport.authenticate('facebook', {failureRedirect: '/login',
+        successRedirect: 'http://localhost:3000'
+    }),
     (req, res) => {
         // Successful authentication, redirect home.
         res.redirect('/');

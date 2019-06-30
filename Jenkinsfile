@@ -78,8 +78,6 @@ pipeline {
        }
 
 
-
- /* QA & Test ENV */
     stage ('Deploy Docker Image To Test Server') {
          steps{
               sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
