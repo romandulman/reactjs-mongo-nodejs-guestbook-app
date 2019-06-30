@@ -3,12 +3,15 @@ const passport = require('passport');
 
 //login
 router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login'}),
+    passport.authenticate('local', { failureRedirect: '/login',
+        successRedirect: 'http://localhost:3000'
+    }
+        )),
 
-   (req, res) => {
+/*   (req, res) => {
       //  res.redirect('http://localhost:3000');
 
-    })
+    })*/
 
 router.get("/login/success", (req, res) => {
     if (req.user) {
@@ -54,7 +57,7 @@ router.get('/google/redirect',
         successRedirect: 'http://localhost:3000'
 
     })
-)
+);
 
    // (req, res) => {
    //     res.send('ok');
