@@ -82,7 +82,7 @@ pipeline {
          steps{
               sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
 
-                  sh 'ssh -v devadmin@192.168.2.15 docker pull 192.168.2.11:8082/guestbook:1'
+                  sh 'ssh -o StrictHostKeyChecking=no -v devadmin@192.168.2.15 docker pull 192.168.2.11:8082/guestbook:1'
                   
               }
           }
