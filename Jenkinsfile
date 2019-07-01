@@ -13,18 +13,7 @@ pipeline {
   }
 
   stages {
-stage ('Verify '){
 
-            agent {
-                node {
-                  label 'host3-jenkins-dind-nodejs-slave'
-                }
-              }
-
-              steps {
-              sh "npm -v"
-      }
-    }
     stage ('Verify Tools'){
       steps {
             parallel (
@@ -88,7 +77,7 @@ stage ('Verify '){
          }
        }
 
-
+/* QA TESTS */
     stage ('Deploy Docker Image To Test Server') {
          steps{
               sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
@@ -117,6 +106,16 @@ stage ('Verify '){
           sh 'artillery quick --count 20 -n 20 http://192.168.2.15:8080/login'
 
          }
+        }
+        stage ('Performance Tests '){
+          agent {
+            node {
+             label 'host3-jenkins-dind-nodejs-slave'
+             }
+            }
+              steps {
+                      sh "npm -v"
+              }
         }
 
   }
