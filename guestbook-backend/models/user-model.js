@@ -14,7 +14,7 @@ userSchema.methods.VerifyPassword = (password) =>{
 
 };
 
-userSchema.pre('save', function(next) {
+/*userSchema.pre('save', function(next) {
     if (this.password) {
         this.salt = new Buffer(
             crypto.randomBytes(16).toString('base64'),
@@ -24,7 +24,7 @@ userSchema.pre('save', function(next) {
             password, this.salt, 10000, 64).toString('base64')
 }
 next();
-});
+});*/
 
 const User = mongoose.model('user', userSchema);
 

@@ -39,7 +39,7 @@ class GuestBook extends Component {
             Body: Body
         };
 
-        fetch('http://127.0.0.1:8080/postguest', {
+        fetch('http://localhost:8080/postguest', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({arr})
@@ -58,7 +58,7 @@ class GuestBook extends Component {
     RemoveHandler = (id) => {
        const data = this.props.GuestsList;
 
-        fetch('http://127.0.0.1:8080/delguest/' + id, {
+        fetch('http://localhost:8080/delguest/' + id, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
 
@@ -83,16 +83,12 @@ class GuestBook extends Component {
             return response;
         };
 
-        fetch("http://127.0.0.1:8080/guests")
+        fetch("http://localhost:8080/guests")
             .then(handleErrors)
             .then(res => res.json())
             .then(result => {
-
                 let data = result;
-                console.log(data)
-
-                // this.setState({data});
-                this.props.sendGuestsData(data)
+               this.props.sendGuestsData(data)
             })
             .catch(err => {
                 console.log(err);

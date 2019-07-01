@@ -13,7 +13,18 @@ pipeline {
   }
 
   stages {
+stage ('Verify '){
 
+            agent {
+                node {
+                  label 'host3-jenkins-dind-nodejs-slave'
+                }
+              }
+
+              steps {
+              sh "npm -v"
+      }
+    }
     stage ('Verify Tools'){
       steps {
             parallel (

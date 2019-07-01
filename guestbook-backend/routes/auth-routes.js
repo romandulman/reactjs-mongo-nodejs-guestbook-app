@@ -3,15 +3,14 @@ const passport = require('passport');
 
 //login
 router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login',
-        successRedirect: 'http://localhost:3000'
-    }
-        )),
+    passport.authenticate('local', { failureRedirect: '/login'}),
+    (req,res)=>{
+        res.send({
+            token: req.user,
+        });
 
-/*   (req, res) => {
-      //  res.redirect('http://localhost:3000');
+    })
 
-    })*/
 
 router.get("/login/success", (req, res) => {
     if (req.user) {
