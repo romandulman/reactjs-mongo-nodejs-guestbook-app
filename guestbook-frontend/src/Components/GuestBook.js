@@ -24,36 +24,6 @@ const mapDispachToProps = (dispach) => {
 };
 
 class GuestBook extends Component {
- /*   state = {
-        data: [
-            {
-                Name: '',
-                Body: ''
-            }
-        ]
-    };*/
-
-    addOne = (Name, Body) => {
-        let arr = {
-            Name: Name,
-            Body: Body
-        };
-
-        fetch('http://localhost:8080/postguest', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({arr})
-
-        }).then(response => response.json())
-            .then(res => {
-
-                   let AddnewData = [...this.props.GuestsList, res]
-                this.props.sendGuestsData(AddnewData)
-
-                console.log(res)
-            });
-    };
-
 
     RemoveHandler = (id) => {
        const data = this.props.GuestsList;

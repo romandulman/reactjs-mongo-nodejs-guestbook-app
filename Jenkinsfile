@@ -107,16 +107,7 @@ pipeline {
 
          }
         }
-        stage ('Performance Tests '){
-          agent {
-            node {
-             label 'host3-jenkins-dind-nodejs-slave'
-             }
-            }
-              steps {
-                 sh "npm -v"
-              }
-        }
+        
 
   }
 }

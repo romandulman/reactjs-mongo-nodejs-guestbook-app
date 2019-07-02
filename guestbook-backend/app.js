@@ -8,6 +8,8 @@ const cookieSession = require("express-session");
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
+var fs = require('fs');
+var multer = require('multer');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -17,6 +19,7 @@ const indexRoutes = require('./routes/index');
 const keys = require('./config/keys');
 const passportCtl = require('./controllers/passportCtl');
 
+
 mongoose.connect(keys.authMongoDB.dbURL, () =>{
     console.log('mongxo connected')
 });
@@ -25,7 +28,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use(cookieSession({
-        secret:'ssshhhh',
         maxAge: 24 * 60 * 60 * 1000,
         secret: [keys.session.cookie_key],
         name: 'guestbookAuth'

@@ -31,9 +31,23 @@ class AddNew extends Component {
         this.webcam = webcam;
     };
 
-    capture = () => {
-        const imageSrc = this.webcam.getScreenshot();
+    captureImage = () => {
+        return new Promise((resolve, reject) => {
+            const imageSrc = this.webcam.getScreenshot();
+            if (imageSrc) {
+                resolve(imageSrc);
+            } else {
+                reject('error while taking image');
+            }
+        });
     };
+    saveImage = () => {
+        this.captureImage()
+            .then(im => {
+                console.log(im);
+                arr.image = im;
+            })
+    }
 
     handleClose = () => {
         this.props.ShowModal();
@@ -94,7 +108,7 @@ class AddNew extends Component {
                     />
                     </Form.Group>
                     <Form.Group>
-                    <Button variant="secondary" onClick={this.capture}>
+                    <Button variant="secondary" onClick={this.saveImage}>
                         Take a Shoot
                     </Button>
                     </Form.Group>
