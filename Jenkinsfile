@@ -85,7 +85,6 @@ pipeline {
                  }
                 }
                   steps {
-                     sh "npm -v"
                      sh 'docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
                   }
 
