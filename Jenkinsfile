@@ -24,12 +24,7 @@ pipeline {
       }
     }
 
-    stage ('Checkout Code') {
-      steps {
-        checkout scm
 
-      }
-    }
 
     stage('Unit Tests'){
       steps {
@@ -77,8 +72,8 @@ pipeline {
          }
        }
 
-/* QA TESTS */
-    stage ('Deploy Docker Image To Test Server') {
+/* QA Env */
+  /*  stage ('Deploy Docker Image To Test Server') {
          agent {
                 node {
                  label 'app-test-jenkins-dind'
@@ -88,7 +83,21 @@ pipeline {
                      sh 'docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
                   }
 
-    }
+    }*/
+    /* QA Env; Deploy Docker image to Stage/Test Server */
+
+     stage ('Deploy To Stage Server') {
+             steps{
+                  sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
+
+                      sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
+                      sh 'ssh -v devadmin@192.168.2.15'
+                      sh 'ssh devadmin@192.168.2.15 docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
+                      sh 'ssh devadmin@192.168.2.15 docker run  -d --name guestbook_app -p 8080:8080 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
+
+                  }
+              }
+        }
 
     stage('UI Tests'){
          /* Run Selenium test  */
