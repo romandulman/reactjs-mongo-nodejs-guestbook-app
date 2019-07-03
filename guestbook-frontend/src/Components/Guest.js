@@ -22,9 +22,8 @@ class Guest extends Component {
                 <Card.Header>{this.props.guestName}</Card.Header>
                 <Card.Body>
                     <blockquote className="blockquote mb-0">
-                        <p>
-                            {this.props.guestBody}
-                        </p>
+                        <p>{this.props.guestBody}</p>
+                        {this.props.imageName && <p><img src={this.props.imageName} alt="Logo" /></p>}
                         <footer className="blockquote-footer">
                             Best Regards, <cite title="Source Title">{this.props.guestName}</cite>
                         </footer>

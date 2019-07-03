@@ -91,7 +91,7 @@ class GuestBook extends Component {
     render() {
         const ViewGuests = this.props.GuestsList.map((guest) =>
             <Col sm={4}> <Guest RemoveHandler={this.RemoveHandler} Id={guest._id}
-                                guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
+                                guestName={guest.Name} imageName = {guest.Image} guestBody={String(guest.Body)}/> </Col>
         );
 
         return (

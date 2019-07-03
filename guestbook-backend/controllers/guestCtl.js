@@ -5,7 +5,8 @@ class guestCtl {
     addGuest(req, res){
         new Guest({
             Name: req.body.arr.Name,
-            Body: req.body.arr.Body
+            Body: req.body.arr.Body,
+            Image: req.body.arr.Image
 
         })
             .save()

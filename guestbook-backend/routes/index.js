@@ -3,9 +3,9 @@ const router = express.Router();
 const Guest = require('../models/guests-model');
 const guestCtl = require('../controllers/guestCtl');
 
+
 router.get('/guests', (req, res) => {
     guestCtl.loadAllGuets(req,res)
-
 });
 
 router.get('/guests/:name', (req, res) => {

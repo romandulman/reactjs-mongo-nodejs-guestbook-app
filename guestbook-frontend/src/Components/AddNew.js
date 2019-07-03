@@ -22,7 +22,8 @@ const mapDispachToProps = (dispach) => {
 };
 let arr = {
     Name: '',
-    Body: ''
+    Body: '',
+    Image:''
 };
 
 class AddNew extends Component {
@@ -42,10 +43,28 @@ class AddNew extends Component {
         });
     };
     saveImage = () => {
+
+
+
         this.captureImage()
             .then(im => {
                 console.log(im);
-                arr.image = im;
+                arr.Image = im;
+               /* fetch('http://127.0.0.1:8080/files', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json' },
+                    body: [im]
+
+                })
+                    .then(res => {
+                        alert(res)
+                    });
+
+*/
+
+
             })
     }
 

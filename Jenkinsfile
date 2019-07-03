@@ -79,16 +79,16 @@ pipeline {
 
 /* QA TESTS */
     stage ('Deploy Docker Image To Test Server') {
-         steps{
-              sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
+         agent {
+                node {
+                 label 'app-test-jenkins-dind'
+                 }
+                }
+                  steps {
+                     sh "npm -v"
+                     sh 'docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
+                  }
 
-                  sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
-                  sh 'ssh -v devadmin@192.168.2.15'
-                  sh 'ssh devadmin@192.168.2.15 docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
-                  sh 'ssh devadmin@192.168.2.15 docker run  -d --name guestbook_app -p 8080:8080 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
-
-              }
-          }
     }
 
     stage('UI Tests'){

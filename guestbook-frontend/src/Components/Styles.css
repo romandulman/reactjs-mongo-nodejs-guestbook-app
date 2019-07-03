@@ -3,6 +3,7 @@
 }
 .guestSty{
     margin: 20px;
+    width: fit-content;
 }
 .hiText{
     color: white;
