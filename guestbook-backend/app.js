@@ -1,6 +1,5 @@
 //process.title = guestbook-backend;
 //process.title = process.argv[2];
-
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
@@ -8,8 +7,6 @@ const cookieSession = require("express-session");
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
-var fs = require('fs');
-var multer = require('multer');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');

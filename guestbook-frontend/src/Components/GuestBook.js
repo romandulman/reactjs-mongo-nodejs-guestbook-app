@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import {connect} from 'react-redux'
+import Cookies  from 'js-cookie';
 
 const mapStateToProps = (state) => {
     return {
@@ -64,9 +65,11 @@ class GuestBook extends Component {
                 console.log(err);
             });
 
-
+        var AuthCookie =  Cookies.get('guestbookAuth')
+        alert(AuthCookie)
+       // cookies.get('name')
         // So you should add credentials: 'include' for sending cookies
-        fetch("http://localhost:8080/auth/login/success", {
+  /*      fetch("http://localhost:8080/auth/login/success", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -85,7 +88,7 @@ class GuestBook extends Component {
             })
             .catch(err => {
                 console.log(err);
-            });
+            });*/
     }
 
     render() {
