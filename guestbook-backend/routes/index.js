@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Guest = require('../models/guests-model');
-const guestCtl = require('../controllers/guestCtl')
+const guestCtl = require('../controllers/guestCtl');
+
 
 router.get('/guests', (req, res) => {
     guestCtl.loadAllGuets(req,res)
-
 });
 
 router.get('/guests/:name', (req, res) => {
@@ -26,15 +26,8 @@ router.post('/postguest', (req, res) => {
 
 
 router.delete('/delguest/:guestid', (req, res) => {
-    //.deleteGuest(req,res)
-    console.log(req.params.guestid)
-    Guest.deleteOne( {
-        _id: req.params.guestid
-    }).then((deleted) => {
-        res.send(deleted)
-    })
+    const GuestId = req.params.guestid ;
+    guestCtl.deleteGuest(GuestId,req,res)
 });
-
-
 
 module.exports = router;

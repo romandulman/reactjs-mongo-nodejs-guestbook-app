@@ -24,41 +24,11 @@ const mapDispachToProps = (dispach) => {
 };
 
 class GuestBook extends Component {
- /*   state = {
-        data: [
-            {
-                Name: '',
-                Body: ''
-            }
-        ]
-    };*/
-
-    addOne = (Name, Body) => {
-        let arr = {
-            Name: Name,
-            Body: Body
-        };
-
-        fetch('http://127.0.0.1:8080/postguest', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({arr})
-
-        }).then(response => response.json())
-            .then(res => {
-
-                   let AddnewData = [...this.props.GuestsList, res]
-                this.props.sendGuestsData(AddnewData)
-
-                console.log(res)
-            });
-    };
-
 
     RemoveHandler = (id) => {
        const data = this.props.GuestsList;
 
-        fetch('http://127.0.0.1:8080/delguest/' + id, {
+        fetch('http://localhost:8080/delguest/' + id, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
 
@@ -83,16 +53,12 @@ class GuestBook extends Component {
             return response;
         };
 
-        fetch("http://127.0.0.1:8080/guests")
+        fetch("http://localhost:8080/guests")
             .then(handleErrors)
             .then(res => res.json())
             .then(result => {
-
                 let data = result;
-                console.log(data)
-
-                // this.setState({data});
-                this.props.sendGuestsData(data)
+               this.props.sendGuestsData(data)
             })
             .catch(err => {
                 console.log(err);
@@ -125,7 +91,7 @@ class GuestBook extends Component {
     render() {
         const ViewGuests = this.props.GuestsList.map((guest) =>
             <Col sm={4}> <Guest RemoveHandler={this.RemoveHandler} Id={guest._id}
-                                guestName={guest.Name} guestBody={String(guest.Body)}/> </Col>
+                                guestName={guest.Name} imageName = {guest.Image} guestBody={String(guest.Body)}/> </Col>
         );
 
         return (

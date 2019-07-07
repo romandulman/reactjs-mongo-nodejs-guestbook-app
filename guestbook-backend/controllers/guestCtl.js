@@ -5,7 +5,8 @@ class guestCtl {
     addGuest(req, res){
         new Guest({
             Name: req.body.arr.Name,
-            Body: req.body.arr.Body
+            Body: req.body.arr.Body,
+            Image: req.body.arr.Image
 
         })
             .save()
@@ -14,7 +15,7 @@ class guestCtl {
             })
     };
 
-    loadAllGuets(req, res){
+    loadAllGuets(req, res) {
         Guest.find({})
             .then((AllGuests) => {
                 if (AllGuests) {
@@ -23,9 +24,13 @@ class guestCtl {
             })
     };
 
-    deleteGuest(req, res){
-
-
+    deleteGuest(guestid, req, res) {
+        Guest.deleteOne({
+            _id: guestid
+        })
+            .then((deleted) => {
+            res.send(deleted)
+        })
     };
 }
 

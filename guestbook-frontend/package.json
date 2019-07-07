@@ -14,8 +14,6 @@
     "redux": "^4.0.1",
     "selenium-webdriver": "^4.0.0-alpha.3"
   },
-  "proxy": "http://127.0.0.1:8080",
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

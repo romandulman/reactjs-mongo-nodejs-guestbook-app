@@ -33,8 +33,7 @@ class Login extends Component {
 
 
     handleLogin = () => {
-        this.props.LoginConfirm(this.userLogin.UserName);
-        fetch('http://127.0.0.1:8080/auth/login', {
+        fetch('http://localhost:8080/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -42,17 +41,32 @@ class Login extends Component {
                 password: this.userLogin.Password
             })
 
-        }).then((res) => {
-            if (res) {
-               console.log(JSON.stringify(res))
+        }).then(res => res.json())
+            .then(user => {
+              //  console.log(user.token.username)
+                this.props.LoginConfirm(user.token.username);
 
+                fetch("http://localhost:8080/auth/login/success", {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Credentials": true
+                    }
+                }).then( ()=>{
+                alert()
+                })
             }
-        });
+
+
+        )
+
 
     };
 
     handleGoogleLogin = () => {
-        window.open("http://127.0.0.1:8080/auth/google", "_self");
+        window.open("http://localhost:8080/auth/google", "_self");
     };
 
 

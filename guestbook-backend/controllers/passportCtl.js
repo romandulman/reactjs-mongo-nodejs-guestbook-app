@@ -16,7 +16,7 @@ passport.deserializeUser((id,done)=>{
 });
 passport.use(
 
-    new LocalStrategy(
+    new LocalStrategy({},
     (username, password, done) => {
         User.findOne({ username: username },  (err, user)  =>{
 
