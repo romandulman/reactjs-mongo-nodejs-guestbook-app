@@ -13,7 +13,7 @@ router.post('/login',
 
     })*/
 
-router.get("/login/success", (req, res) => {
+/*router.get("/login/success", (req, res) => {
     if (req.user) {
         res.json({
             success: true,
@@ -22,7 +22,7 @@ router.get("/login/success", (req, res) => {
             cookies: req.cookies
         });
     }
-});
+});*/
 
 // when login failed, send failed msg
 router.get("/login/failed", (req, res) => {
