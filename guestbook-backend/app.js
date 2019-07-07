@@ -24,27 +24,23 @@ mongoose.connect(keys.authMongoDB.dbURL, () =>{
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use(cookieSession({
-        maxAge: 24 * 60 * 60 * 1000,
-        secret: [keys.session.cookie_key],
-        name: 'guestbookAuth'
-
-    })
-);
-
 app.use(logger('dev'));
-app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(cookieSession({
+        maxAge: 24 * 60 * 60 * 1000,
+        secret: [keys.session.cookie_key],
+        name: 'guestbookAuth',
 
 
+    })
+);
 /*app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -80,6 +76,7 @@ app.get("/", authCheck, (req, res) => {
         user: req.user,
         cookies: req.cookies
     });
+    console.log('okkkkkkkkkkkk')
 });
 
 app.use((req, res, next) => {

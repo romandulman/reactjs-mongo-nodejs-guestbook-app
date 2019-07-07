@@ -54,8 +54,10 @@ class GuestBook extends Component {
             return response;
         };
 
-        fetch("http://localhost:8080/guests")
-            .then(handleErrors)
+        fetch("http://localhost:8080/guests",{credentials: "include"})
+
+
+    .then(handleErrors)
             .then(res => res.json())
             .then(result => {
                 let data = result;
@@ -64,9 +66,9 @@ class GuestBook extends Component {
             .catch(err => {
                 console.log(err);
             });
+        Cookies.remove('guestbookAuth')
 
-        var AuthCookie =  Cookies.get('guestbookAuth')
-        alert(AuthCookie)
+        console.log(Cookies.get('guestbookAuth', true));
        // cookies.get('name')
         // So you should add credentials: 'include' for sending cookies
   /*      fetch("http://localhost:8080/auth/login/success", {

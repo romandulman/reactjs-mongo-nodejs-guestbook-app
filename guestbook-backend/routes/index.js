@@ -3,8 +3,18 @@ const router = express.Router();
 const Guest = require('../models/guests-model');
 const guestCtl = require('../controllers/guestCtl');
 
-
-router.get('/guests', (req, res) => {
+const authCheck = (req, res, next) => {
+    if (!req.user) {
+        res.status(401).json({
+            authenticated: false,
+            message: "user has not been authenticated"
+        });
+    } else {
+        console.log('okk')
+        next();
+    }
+};
+router.get('/guests',authCheck, (req, res) => {
     guestCtl.loadAllGuets(req,res)
 });
 
