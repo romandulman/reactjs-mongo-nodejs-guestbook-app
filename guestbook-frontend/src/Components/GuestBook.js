@@ -53,16 +53,16 @@ class GuestBook extends Component {
             }
             return response;
         };
+       /* fetch("http://localhost:8080/a", { headers:
+                { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            credentials: 'include',
+            method: 'GET',
+         })
+            .then(d =>{
+            alert(d)
+        })*/
 
-        fetch("http://localhost:8080/guests",{
-            method: "GET",
-            credentials: "include",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Credentials": true
-            }
-        })
+        fetch("http://localhost:8080/guests")
 
 
     .then(handleErrors)
@@ -74,12 +74,10 @@ class GuestBook extends Component {
             .catch(err => {
                 console.log(err);
             });
-        Cookies.remove('guestbookAuth')
 
-        console.log(Cookies.get('guestbookAuth', true));
-       // cookies.get('name')
+
         // So you should add credentials: 'include' for sending cookies
-  /*      fetch("http://localhost:8080/auth/login/success", {
+        fetch("http://localhost:8080/auth/login/success", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -98,7 +96,7 @@ class GuestBook extends Component {
             })
             .catch(err => {
                 console.log(err);
-            });*/
+            });
     }
 
     render() {

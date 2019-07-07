@@ -12,16 +12,13 @@ router.post('/login',
     })
 
 
-/*router.get("/login/success", (req, res) => {
+router.get("/login/success", (req, res) => {
+    console.log('ssssss'+req.session.user)
+
     if (req.user) {
-        res.json({
-            success: true,
-            message: "user has successfully authenticated",
-            user: req.user,
-            cookies: req.cookies
-        });
+
     }
-});*/
+});
 
 // when login failed, send failed msg
 router.get("/login/failed", (req, res) => {

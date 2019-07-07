@@ -4,6 +4,8 @@ const Guest = require('../models/guests-model');
 const guestCtl = require('../controllers/guestCtl');
 
 const authCheck = (req, res, next) => {
+    console.log('okk'+req.user)
+
     if (!req.user) {
         res.status(401).json({
             authenticated: false,
@@ -14,7 +16,10 @@ const authCheck = (req, res, next) => {
         next();
     }
 };
-router.get('/guests',authCheck, (req, res) => {
+router.get('/a',authCheck, (req, res) => {
+    console.log('coookie')
+});
+router.get('/guests', (req, res) => {
     guestCtl.loadAllGuets(req,res)
 });
 

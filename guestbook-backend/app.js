@@ -3,7 +3,8 @@
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
-const cookieSession = require("express-session");
+//const cookieSession = require("express-session");
+const cookieSession = require("cookie-session");
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
@@ -32,20 +33,29 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(passport.session());
-app.use(cookieSession({
+/*app.use(cookieSession({ secret: 'super secret' }));
+
+  /!*  ({
+
         maxAge: 24 * 60 * 60 * 1000,
         secret: [keys.session.cookie_key],
         name: 'guestbookAuth',
 
 
+ /!*   secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    *!/
+    })
+);*!/*/
+app.use(passport.session());
+app.use(
+    cookieSession({
+        name: "session",
+        keys: [keys.session.cookie_key],
+        maxAge: 24 * 60 * 60 * 100
     })
 );
-/*app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});*/
 
 app.use('/auth', authRoutes);
 app.use('/', indexRoutes);
