@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import {connect} from 'react-redux'
-import Cookies  from 'js-cookie';
+import Cookies from 'js-cookie';
 
 const mapStateToProps = (state) => {
     return {
@@ -18,18 +18,17 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
-
+        LoginConfirm: (name) => dispach({type: "IsLoggedIn", LoggedUserName: name}),
         sendGuestsData: (guestsData) => dispach({type: "DATA", guestsData: guestsData}),
-
     }
 };
 
 class GuestBook extends Component {
 
     RemoveHandler = (id) => {
-       const data = this.props.GuestsList;
+        const data = this.props.GuestsList;
 
-        fetch('http://localhost:8080/delguest/' + id, {
+        fetch('/guests/delguest/' + id, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
 
@@ -37,9 +36,9 @@ class GuestBook extends Component {
             .then(res => res.json())
             .then(() => {
                 let newData = data.filter(guest => guest._id !== id);
-              /*  this.setState({
-                    data: newData
-                });*/
+                /*  this.setState({
+                      data: newData
+                  });*/
                 this.props.sendGuestsData(newData)
 
 
@@ -47,37 +46,26 @@ class GuestBook extends Component {
     };
 
     componentDidMount() {
+
         const handleErrors = (response) => {
             if (!response.ok) {
                 throw Error(response.statusText);
             }
             return response;
         };
-       /* fetch("http://localhost:8080/a", { headers:
-                { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            credentials: 'include',
-            method: 'GET',
-         })
-            .then(d =>{
-            alert(d)
-        })*/
+        fetch("/guests/allguests")
 
-        fetch("http://localhost:8080/guests")
-
-
-    .then(handleErrors)
+            .then(handleErrors)
             .then(res => res.json())
             .then(result => {
                 let data = result;
-               this.props.sendGuestsData(data)
+                this.props.sendGuestsData(data)
             })
             .catch(err => {
                 console.log(err);
             });
 
-
-        // So you should add credentials: 'include' for sending cookies
-        fetch("http://localhost:8080/auth/login/success", {
+        fetch("/auth/login/success", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -92,7 +80,9 @@ class GuestBook extends Component {
                 throw new Error("failed to authenticate user");
             })
             .then(responseJson => {
-                console.log(responseJson.user.username)
+                console.log(responseJson.username);
+                this.props.LoginConfirm(responseJson.username);
+
             })
             .catch(err => {
                 console.log(err);
@@ -102,7 +92,7 @@ class GuestBook extends Component {
     render() {
         const ViewGuests = this.props.GuestsList.map((guest) =>
             <Col sm={4}> <Guest RemoveHandler={this.RemoveHandler} Id={guest._id}
-                                guestName={guest.Name} imageName = {guest.Image} guestBody={String(guest.Body)}/> </Col>
+                                guestName={guest.Name} imageName={guest.Image} guestBody={String(guest.Body)}/> </Col>
         );
 
         return (

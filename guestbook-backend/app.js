@@ -13,12 +13,12 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const authRoutes = require('./routes/auth-routes');
-const indexRoutes = require('./routes/index');
+const guestsRoutes = require('./routes/guests-routes');
 const keys = require('./config/keys');
 const passportCtl = require('./controllers/passportCtl');
 
 
-mongoose.connect(keys.authMongoDB.dbURL, () =>{
+mongoose.connect(keys.authMongoDB.dbURL, () => {
     console.log('mongxo connected')
 });
 
@@ -32,62 +32,22 @@ app.use(cors({
     credentials: true
 }));
 app.use(cookieParser());
-app.use(passport.initialize());
-/*app.use(cookieSession({ secret: 'super secret' }));
 
-  /!*  ({
 
+app.use(cookieSession({
         maxAge: 24 * 60 * 60 * 1000,
-        secret: [keys.session.cookie_key],
-        name: 'guestbookAuth',
-
-
- /!*   secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    *!/
-    })
-);*!/*/
-app.use(passport.session());
-app.use(
-    cookieSession({
-        name: "session",
         keys: [keys.session.cookie_key],
-        maxAge: 24 * 60 * 60 * 100
+        name: 'guestbookAuth'
     })
 );
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/auth', authRoutes);
-app.use('/', indexRoutes);
+app.use('/guests', guestsRoutes);
 
-app.use(express.static(path.join(__dirname, 'public', )));
+app.use(express.static(path.join(__dirname, 'public',)));
 
-const authCheck = (req, res, next) => {
-    if (!req.user) {
-        res.status(401).json({
-            authenticated: false,
-            message: "user has not been authenticated"
-        });
-    } else {
-        next();
-    }
-};
-
-
-
-/*app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-}); */
-
-app.get("/", authCheck, (req, res) => {
-    res.status(200).json({
-        authenticated: true,
-        message: "user successfully authenticated",
-        user: req.user,
-        cookies: req.cookies
-    });
-    console.log('okkkkkkkkkkkk')
-});
 
 app.use((req, res, next) => {
     next(createError(404));

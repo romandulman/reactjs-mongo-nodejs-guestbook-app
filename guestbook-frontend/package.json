@@ -23,6 +23,7 @@
     "eject": "react-scripts eject",
     "seleniumtest": "node ./selenium-test/test1.js"
   },
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },

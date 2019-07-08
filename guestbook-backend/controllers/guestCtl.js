@@ -2,7 +2,7 @@ const Guest = require('../models/guests-model');
 
 class guestCtl {
 
-    addGuest(req, res){
+    addGuest(req, res) {
         new Guest({
             Name: req.body.arr.Name,
             Body: req.body.arr.Body,
@@ -29,8 +29,8 @@ class guestCtl {
             _id: guestid
         })
             .then((deleted) => {
-            res.send(deleted)
-        })
+                res.send(deleted)
+            })
     };
 }
 

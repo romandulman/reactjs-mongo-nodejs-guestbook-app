@@ -16,10 +16,8 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
-
         LoginConfirm: (name) => dispach({type: "IsLoggedIn", LoggedUserName: name}),
         handleShowLogin: () => dispach({type: "LOGIN"})
-
     }
 };
 
@@ -33,7 +31,7 @@ class Login extends Component {
 
 
     handleLogin = () => {
-        fetch('http://localhost:8080/auth/login', {
+        fetch('/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -43,26 +41,9 @@ class Login extends Component {
 
         }).then(res => res.json())
             .then(user => {
-              //  console.log(user.token.username)
                 this.props.LoginConfirm(user.token.username);
 
-                fetch("http://localhost:8080/auth/login/success", {
-                    method: "GET",
-                    credentials: "include",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Credentials": true
-                    }
-                }).then( ()=>{
-                alert()
-                })
-            }
-
-
-        )
-
-
+            })
     };
 
     handleGoogleLogin = () => {

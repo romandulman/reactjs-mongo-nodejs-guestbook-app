@@ -1,32 +1,41 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-//login
+
+const authCheck = (req, res, next) => {
+    if (!req.user) {
+        res.status(401).json({
+            authenticated: false,
+            message: "user has not been authenticated"
+        });
+    } else {
+        next();
+    }
+};
+
+
 router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login'}),
-    (req,res)=>{
+    passport.authenticate('local', {
+        failureRedirect: '/login'
+    }), (req, res) => {
         res.send({
             token: req.user,
         });
+    });
 
-    })
-
-
-router.get("/login/success", (req, res) => {
-    console.log('ssssss'+req.session.user)
-
-    if (req.user) {
-
-    }
+router.get("/login/success",authCheck, (req, res) => {
+        res.send({
+            username: req.user.username
+        })
 });
 
-// when login failed, send failed msg
 router.get("/login/failed", (req, res) => {
     res.status(401).json({
         success: false,
         message: "user failed to authenticate."
     });
 });
+
 router.get('/google',
     passport.authenticate('google', {
         scope: ['https://www.googleapis.com/auth/plus.login']
@@ -39,7 +48,8 @@ router.get('/facebook',
     }));
 
 router.get('/facebook/callback',
-    passport.authenticate('facebook', {failureRedirect: '/login',
+    passport.authenticate('facebook', {
+        failureRedirect: '/login',
         successRedirect: 'http://localhost:3000'
     }),
     (req, res) => {
@@ -55,15 +65,13 @@ router.get('/google/redirect',
     })
 );
 
-   // (req, res) => {
-   //     res.send('ok');
-  //  });
+router.get("/logout", (req, res) => {
+   // req.session.destroy
+    res.redirect('http://localhost:3000');
+    //res.end();
+    //req.session = null;
 
-
-    router.get("/logout", (req, res) => {
-        req.logout();
-        res.redirect('http://localhost:3000');
-    });
+});
 
 
 module.exports = router;
