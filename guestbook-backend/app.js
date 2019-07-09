@@ -3,8 +3,8 @@
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
-//const cookieSession = require("express-session");
-const cookieSession = require("cookie-session");
+const cookieSession = require("express-session");
+//const cookieSession = require("cookie-session");
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
@@ -26,18 +26,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use(logger('dev'));
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true
-}));
+
 app.use(cookieParser());
 
 
 app.use(cookieSession({
-        maxAge: 24 * 60 * 60 * 1000,
-        keys: [keys.session.cookie_key],
-        name: 'guestbookAuth'
+        secret: [keys.session.cookie_key],
+        resave: false,
+        saveUninitialized: false,
+
     })
 );
 

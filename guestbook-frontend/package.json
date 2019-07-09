@@ -14,7 +14,8 @@
     "react-scripts": "3.0.1",
     "react-webcam": "^1.1.1",
     "redux": "^4.0.1",
-    "selenium-webdriver": "^4.0.0-alpha.3"
+    "selenium-webdriver": "^4.0.0-alpha.3",
+    "universal-cookie": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,3 +1,6 @@
+import Cookies from 'universal-cookie';
+
+
 const initState = {
     isLoggedIn: false,
     showDeleteBtn: false,
@@ -31,6 +34,7 @@ const reducer = (state = initState, action) => {
                 newState.showDeleteBtn = false;
                 if (state.isLoggedIn) {
                     window.open("http://127.0.0.1:8080/auth/logout", "_self");
+
 
                 }
             }
