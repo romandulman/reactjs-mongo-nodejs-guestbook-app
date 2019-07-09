@@ -66,12 +66,12 @@ router.get('/google/redirect',
 );
 
 router.get("/logout", (req, res) => {
-   req.logout();
+   req.logOut();
     req.session.destroy(function (err) {
         res.clearCookie('connect.sid');
-    //    res.send('Logged out');
+       res.send('Logged out');
 
-        res.redirect('/');
+        //res.redirect('http://localhost:3000');
     })
 
 });

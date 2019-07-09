@@ -1,5 +1,5 @@
 import Cookies from 'universal-cookie';
-
+const cookies = new Cookies();
 
 const initState = {
     isLoggedIn: false,
@@ -33,7 +33,17 @@ const reducer = (state = initState, action) => {
                 newState.isLoggedIn = false;
                 newState.showDeleteBtn = false;
                 if (state.isLoggedIn) {
-                    window.open("http://127.0.0.1:8080/auth/logout", "_self");
+                  //  cookies.remove('connect.sid')
+                    fetch("/auth/logout")
+
+                        .then(res => res.json())
+                        .then(result => {
+                            let data = result;
+                            console.log(data)
+                            newState.LoggedUserName = data
+                        })
+
+                  //  window.open("http://127.0.0.1:8080/auth/logout", "_self");
 
 
                 }
@@ -48,7 +58,7 @@ const reducer = (state = initState, action) => {
             break;
         case "DATA":
             newState.GuestsList = action.guestsData;
-            console.log(action.guestsData);
+           // console.log(action.guestsData);
             break;
 
     }
