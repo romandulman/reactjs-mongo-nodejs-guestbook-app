@@ -42,10 +42,8 @@ class AddNew extends Component {
             }
         });
     };
+
     saveImage = () => {
-
-
-
         this.captureImage()
             .then(im => {
                 console.log(im);
@@ -63,8 +61,6 @@ class AddNew extends Component {
                     });
 
 */
-
-
             })
     }
 

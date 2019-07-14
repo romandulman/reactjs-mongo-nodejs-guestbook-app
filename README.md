@@ -5,9 +5,9 @@ Gusetbook App - Mongo DB + Node.JS Backend and React.JS frontend, Docker and Jen
 
 #### This Example project implements:
 
-- Node.JS as backend with express in MVC methodology
-- MongoDB
-- React.JS & Redux as frontend
+- Backend: Node.JS express in MVC methodology
+- Frontend: React.JS + Redux + React Router
+- DB: MongoDB
 - Webcam capture in ReactJS
 - Auth With Passport.JS (Google ,Facebook, LocalDB)
 - Unit tests both in frontend & backend (Mocha, Chai, Chai-HTTP, Jest)

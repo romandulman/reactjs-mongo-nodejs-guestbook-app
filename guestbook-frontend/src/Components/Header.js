@@ -3,7 +3,7 @@ import './Styles.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Login from './Login'
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
+        LoginConfirm: (name) => dispach({type: "IsLoggedIn", LoggedUserName: name}),
         LoginBtn: () => dispach({type: "LOGIN"}),
         ShowModal: () => dispach({type: "SHOWMODAL"})
     }
@@ -29,6 +30,40 @@ class Header extends Component {
 
     };
 
+    componentDidMount() {
+
+        const handleErrors = (response) => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response;
+        };
+
+        fetch("/auth/login/success", {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Credentials": true
+            }
+        })
+            .then(handleErrors)
+            .then(response => {
+                if (response.status === 200) return response.json();
+                throw new Error("failed to authenticate user");
+            })
+            .then(responseJson => {
+                console.log(responseJson.username);
+                this.props.LoginConfirm(responseJson.username);
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+
     render() {
         return (
             <Navbar className='fixed-top' collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -36,12 +71,15 @@ class Header extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
+                        <Nav.Link> <Link to="/guests">Home</Link></Nav.Link>
                         <Nav.Link onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
-                        <Nav.Link>Show all</Nav.Link>
-                        <Nav.Link onClick={this.props.LoginBtn}>{this.props.isLoggedIn ? "Logout" : "Login"}</Nav.Link>
                     </Nav>
-                    <Nav.Item><h5
-                        className='hiText'> {this.props.isLoggedIn ? "Hi " + this.props.LoggedUserName + " !" : ""}</h5>
+                    <Nav.Item>
+                        <h5  className='hiText'> {this.props.isLoggedIn ? "Hi " + this.props.LoggedUserName + " !" : ""}</h5>
+                    </Nav.Item>
+                    <Nav.Item>{this.props.isLoggedIn && <Nav.Link><Link to="/profile">My Profile</Link></Nav.Link>}</Nav.Item>
+                    <Nav.Item> <Nav.Link
+                        onClick={this.props.LoginBtn}>{this.props.isLoggedIn ? "Logout" : "Login"}</Nav.Link>
                     </Nav.Item>
                 </Navbar.Collapse>
                 <Login/>
