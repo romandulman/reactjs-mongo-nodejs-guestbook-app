@@ -66,12 +66,12 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.on('ready', function() {
+//app.on('ready', function() {
     let server = app.listen(8080, () => {
     let host = 'localhost';
     let port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port)
 });
     module.exports = server;
-});
+//});
 
