@@ -12,6 +12,7 @@ class guestCtl {
             .save()
             .then((newGuest) => {
                 res.send(newGuest)
+                console.log(newGuest)
             })
     };
 

@@ -18,8 +18,10 @@ const keys = require('./config/keys');
 const passportCtl = require('./controllers/passportCtl');
 
 
-mongoose.connect(keys.authMongoDB.dbURL, () => {
-    console.log('mongxo connected')
+mongoose.connect(keys.authMongoDB.dbURL);
+mongoose.connection.once('open', () => {
+    app.emit('ready');
+    console.log('Mongodb Connected..')
 });
 
 app.use(express.json());
@@ -64,10 +66,12 @@ app.use((err, req, res, next) => {
     });
 });
 
-let server = app.listen(8080, () => {
+app.on('ready', function() {
+    let server = app.listen(8080, () => {
     let host = 'localhost';
     let port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port)
 });
+    module.exports = server;
+});
 
-module.exports = server;

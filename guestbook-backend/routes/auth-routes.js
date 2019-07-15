@@ -19,13 +19,22 @@ router.post('/login',
         failureRedirect: '/login'
     }), (req, res) => {
         res.send({
-            token: req.user,
+            profile: {
+                Username: req.user.username,
+                Email: '',
+                ProfileImage: req.user.profileimage,
+
+            }
         });
     });
 
 router.get("/login/success",authCheck, (req, res) => {
         res.send({
-            username: req.user.username
+            profile: {
+                Username: req.user.username,
+                Email: '',
+                ProfileImage: req.user.profileimage,
+            }
         })
 });
 

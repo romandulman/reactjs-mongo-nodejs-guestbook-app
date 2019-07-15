@@ -3,20 +3,21 @@ import './Styles.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Login from './Login'
+import AddNew from './AddNew'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.isLoggedIn,
-        LoggedUserName: state.LoggedUserName
+        UserProfile: state.UserProfile
     }
 };
 
 const mapDispachToProps = (dispach) => {
 
     return {
-        LoginConfirm: (name) => dispach({type: "IsLoggedIn", LoggedUserName: name}),
+        LoginConfirm: (profile) => dispach({type: "IsLoggedIn", UserProfile: profile}),
         LoginBtn: () => dispach({type: "LOGIN"}),
         ShowModal: () => dispach({type: "SHOWMODAL"})
     }
@@ -26,8 +27,7 @@ const mapDispachToProps = (dispach) => {
 class Header extends Component {
 
     addGuestHandler = () => {
-        (this.props.isLoggedIn ? this.props.ShowModal() : this.props.LoginBtn())
-
+       (this.props.isLoggedIn ? this.props.ShowModal() : this.props.LoginBtn())
     };
 
     componentDidMount() {
@@ -53,10 +53,8 @@ class Header extends Component {
                 if (response.status === 200) return response.json();
                 throw new Error("failed to authenticate user");
             })
-            .then(responseJson => {
-                console.log(responseJson.username);
-                this.props.LoginConfirm(responseJson.username);
-
+            .then(profileRes => {
+                this.props.LoginConfirm(profileRes.profile);
             })
             .catch(err => {
                 console.log(err);
@@ -75,7 +73,7 @@ class Header extends Component {
                         <Nav.Link onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
                     </Nav>
                     <Nav.Item>
-                        <h5  className='hiText'> {this.props.isLoggedIn ? "Hi " + this.props.LoggedUserName + " !" : ""}</h5>
+                        <h5  className='hiText'> {this.props.isLoggedIn ? "Hi " + this.props.UserProfile.Username + " !" : ""}</h5>
                     </Nav.Item>
                     <Nav.Item>{this.props.isLoggedIn && <Nav.Link><Link to="/profile">My Profile</Link></Nav.Link>}</Nav.Item>
                     <Nav.Item> <Nav.Link
@@ -83,7 +81,7 @@ class Header extends Component {
                     </Nav.Item>
                 </Navbar.Collapse>
                 <Login/>
-
+              <AddNew/>
             </Navbar>
         );
     }

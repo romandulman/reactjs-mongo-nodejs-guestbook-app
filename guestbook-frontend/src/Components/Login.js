@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = (dispach) => {
 
     return {
-        LoginConfirm: (name) => dispach({type: "IsLoggedIn", LoggedUserName: name}),
+        LoginConfirm: (profile) => dispach({type: "IsLoggedIn", UserProfile: profile}),
         handleShowLogin: () => dispach({type: "LOGIN"})
     }
 };
@@ -41,7 +41,7 @@ class Login extends Component {
 
         }).then(res => res.json())
             .then(user => {
-                this.props.LoginConfirm(user.token.username);
+                this.props.LoginConfirm(user.profile);
 
             })
     };

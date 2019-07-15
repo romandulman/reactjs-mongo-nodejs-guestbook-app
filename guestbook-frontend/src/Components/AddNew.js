@@ -69,8 +69,7 @@ class AddNew extends Component {
     };
 
     handleAdd = () => {
-        this.props.ShowModal();
-        fetch('http://127.0.0.1:8080/postguest', {
+        fetch('/guests/postguest', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({arr})
@@ -79,6 +78,8 @@ class AddNew extends Component {
             .then(res => {
                 let AddnewData = [...this.props.GuestsList, res];
                 this.props.sendGuestsData(AddnewData)
+                this.props.ShowModal();
+
             });
     };
 

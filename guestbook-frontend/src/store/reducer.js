@@ -9,11 +9,16 @@ const initState = {
     GuestsList: [
         {
             Name: '',
-            Body: ''
+            Body: '',
+            Image: ''
         }
     ],
     LoggedUserName: '',
-    Password: '',
+    UserProfile:{
+       Username: '',
+       Email:'',
+       ProfileImage:'',
+    }
 
 
 };
@@ -33,17 +38,14 @@ const reducer = (state = initState, action) => {
                 newState.isLoggedIn = false;
                 newState.showDeleteBtn = false;
                 if (state.isLoggedIn) {
-                  //  cookies.remove('connect.sid')
                     fetch("/auth/logout")
-
                         .then(res => res.json())
                         .then(result => {
                             let data = result;
-                            console.log(data)
+                            console.log(data);
                             newState.LoggedUserName = data
                         })
 
-                  //  window.open("http://127.0.0.1:8080/auth/logout", "_self");
 
 
                 }
@@ -54,7 +56,7 @@ const reducer = (state = initState, action) => {
             newState.isLoggedIn = !state.isLoggedIn;
             newState.showDeleteBtn = true;
             newState.showLogin = false;
-            newState.LoggedUserName = action.LoggedUserName;
+            newState.UserProfile = action.UserProfile;
             break;
         case "DATA":
             newState.GuestsList = action.guestsData;

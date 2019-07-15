@@ -5,7 +5,8 @@ const crypto = require('crypto');
 const userSchema =  new Schema({
     username: String,
     password: String,
-    googleId: String
+    googleId: String,
+    profileimage: String
 });
 
 userSchema.methods.VerifyPassword = (password) =>{
