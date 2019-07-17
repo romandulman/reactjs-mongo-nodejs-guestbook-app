@@ -10,7 +10,7 @@ Gusetbook App - Mongo DB + Node.JS Backend and React.JS frontend, Docker and Jen
 - DB: MongoDB
 - Webcam capture in ReactJS
 - Auth With Passport.JS (Google ,Facebook, LocalDB)
-- Unit tests both in frontend & backend (Mocha, Chai, Chai-HTTP, Jest)
+- Unit & Integration tests in both frontend & backend (Mocha, Chai, Chai-HTTP, Jest, Enzyme)
 - Load & Performance tests
 - Selenium UI tests with Node.JS
 - Static Code Analysis with SonarQube

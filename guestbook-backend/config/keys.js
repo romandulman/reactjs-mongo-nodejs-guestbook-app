@@ -6,7 +6,7 @@ module.exports = {
     },
 
     authMongoDB: {
-        dbURL: 'mongodb://192.168.2.14:27017/testdb',
+        dbURL: 'mongodb://localhost:27017/testdb',
         useNewUrlParser: true
     },
      session: {
