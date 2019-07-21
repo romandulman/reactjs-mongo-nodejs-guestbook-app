@@ -1,6 +1,6 @@
 pipeline {
    environment {
-             registry = 'our-private-docker-repo-ip:your-port/guestbook'
+             registry = 'your-private-docker-repo-ip:your-port/guestbook'
              registryCredential = 'localdockerreg'
              registyAddr = 'our-private-docker-repo-ip:your-port'
              dockerImage = ''
@@ -85,7 +85,7 @@ pipeline {
              steps{
                   sshagent(credentials : ['YOUR-CREDENTIALS']) {
 
-                      sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
+                      sh 'ssh -o StrictHostKeyChecking=no admin@your-test-server-ip uptime'
                       sh 'ssh -v admin@your-test-server-ip'
                       sh 'ssh admin@your-test-server-ip docker pull your-private-docker-repo-ip:your-port/guestbook' + ":$BUILD_NUMBER"
                       sh 'ssh admin@your-test-server-ip docker rm --force guestbook_app' /*remove prev image */
