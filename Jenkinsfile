@@ -22,7 +22,27 @@ pipeline {
             )
       }
     }
-stage('Build Frontend'){
+
+    stage('Unit Tests'){
+      steps {
+        sh 'cd guestbook-backend && npm install && npm test '
+        sh 'cd guestbook-frontend && npm install && npm test '
+      }
+    }
+
+  /*  stage('Static Code Analysis'){
+       /* SonarQube Analysis  */
+      steps {
+            withSonarQubeEnv('Host-2-SonarQube') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+            timeout(time: 1, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+            }
+      }
+    }*/
+
+    stage('Build Frontend'){
           /* Build React Frontend  */
              steps{
               sh 'cd guestbook-frontend && npm  run build'
@@ -39,26 +59,6 @@ stage('Build Frontend'){
              }
          }
     }
-    stage('Unit Tests'){
-      steps {
-        sh 'cd guestbook-backend && npm install && npm test '
-        sh 'cd guestbook-frontend && npm install && npm test '
-      }
-    }
-
-    stage('Static Code Analysis'){
-       /* SonarQube Analysis  */
-      steps {
-            withSonarQubeEnv('Host-2-SonarQube') {
-                sh "${scannerHome}/bin/sonar-scanner"
-            }
-            timeout(time: 1, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
-            }
-      }
-    }
-
-
 
 
 
