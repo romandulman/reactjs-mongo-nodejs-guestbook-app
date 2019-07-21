@@ -40,8 +40,8 @@ pipeline {
                 waitForQualityGate abortPipeline: true
             }
       }
-    }
-*/
+    } */
+
     stage('Build Frontend'){
           /* Build React Frontend  */
              steps{
