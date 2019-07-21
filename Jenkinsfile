@@ -30,7 +30,7 @@ pipeline {
       }
     }
 
-  /*  stage('Static Code Analysis'){
+    stage('Static Code Analysis'){
        /* SonarQube Analysis  */
       steps {
             withSonarQubeEnv('Host-2-SonarQube') {
@@ -40,7 +40,7 @@ pipeline {
                 waitForQualityGate abortPipeline: true
             }
       }
-    }*/
+    }
 
     stage('Build Frontend'){
           /* Build React Frontend  */
@@ -48,6 +48,7 @@ pipeline {
               sh 'cd guestbook-frontend && npm  run build'
              }
           }
+          
  stage('Build Docker Image & Publish'){
       /* Build Docker Image & Publish to Nexus Local  Private Docker registry  */
          steps{
