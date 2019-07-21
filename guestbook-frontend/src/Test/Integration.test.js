@@ -17,11 +17,8 @@ const store = createStore(reducer);
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<GuestBook />', () => {
-    it('renders three <App /> components', () => {
-        const wrapper = shallow(<App/>);
-        expect(wrapper.find(Header)).to.have.lengthOf(1);
-    })
-    it('renders an `.icon-star`', () => {
+
+    it('renders an Guest', () => {
         const wrapper = shallow(<Provider store={store}><GuestBook /></Provider>);
         expect(wrapper.find(Guest)).to.have.lengthOf(1);
     });
