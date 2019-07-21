@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/guestbook-backend" libraries="{reactjs-mongo-nodejs-guestbook-app/guestbook-backend/node_modules}" />
-    <file url="file://$PROJECT_DIR$/guestbook-frontend" libraries="{reactjs-mongo-nodejs-guestbook-app/guestbook-frontend/node_modules}" />
-    <file url="PROJECT" libraries="{@types/passport, reactjs-mongo-nodejs-guestbook-app/guestbook-backend/node_modules, reactjs-mongo-nodejs-guestbook-app/guestbook-frontend/node_modules}" />
+    <file url="PROJECT" libraries="{@types/chai, @types/chai-enzyme, @types/enzyme, @types/express, @types/mocha, @types/mongoose, @types/node, @types/passport, @types/react}" />
     <includedPredefinedLibrary name="HTTP Response Handler" />
   </component>
 </project>
