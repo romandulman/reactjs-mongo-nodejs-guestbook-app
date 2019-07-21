@@ -31,7 +31,7 @@ pipeline {
     }
 
 /*    stage('Static Code Analysis'){
-       /* SonarQube Analysis  */
+        SonarQube Analysis
       steps {
             withSonarQubeEnv('Host-2-SonarQube') {
                 sh "${scannerHome}/bin/sonar-scanner"
