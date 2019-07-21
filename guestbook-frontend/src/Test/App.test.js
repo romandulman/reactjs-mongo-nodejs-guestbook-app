@@ -24,4 +24,12 @@ describe('<App />', () => {
 
 });
 
+describe('<GuestBook />', () => {
+
+    it('renders an Guest', () => {
+        const wrapper = shallow(<Provider store={store}><GuestBook /></Provider>);
+        expect(wrapper.find(Guest)).to.have.lengthOf(1);
+    });
+});
+
 

@@ -74,8 +74,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "jest ./Test/App.test.js",
-    "test:integration": "jest ./Test/Integration.test.js",
+    "test": "jest",
     "seleniumtest": "node ./selenium-test/test1.js"
   },
   "proxy": "http://localhost:8080",

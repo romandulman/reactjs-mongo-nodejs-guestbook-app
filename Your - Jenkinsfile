@@ -33,7 +33,7 @@ pipeline {
     stage('Static Code Analysis'){
        /* SonarQube Analysis  */
       steps {
-            withSonarQubeEnv('Host-2-SonarQube') {
+            withSonarQubeEnv('SonarQubeServer') {
                 sh "${scannerHome}/bin/sonar-scanner"
             }
             timeout(time: 1, unit: 'MINUTES') {
@@ -54,7 +54,7 @@ pipeline {
          steps{
              script {
                dockerImage = docker.build(registry + ":$BUILD_NUMBER" ,"-f .docker/stage/Dockerfile .")
-                docker.withRegistry( 'http://192.168.2.11:8082', registryCredential ) {
+                docker.withRegistry( 'http://your-ip:8082', registryCredential ) {
                   dockerImage.push()
                 }
              }
@@ -78,7 +78,7 @@ pipeline {
                  }
                 }
                   steps {
-                     sh 'docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
+                     sh 'docker pull your-private-docker-repo-ip:your-port/guestbook' + ":$BUILD_NUMBER"
                   }
 
     }*/
@@ -86,13 +86,13 @@ pipeline {
 
      stage ('Deploy To Test/Staging Server') {
              steps{
-                  sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
+                  sshagent(credentials : ['YOUR-CREDENTIALS']) {
 
                       sh 'ssh -o StrictHostKeyChecking=no devadmin@192.168.2.15 uptime'
-                      sh 'ssh -v devadmin@192.168.2.15'
-                      sh 'ssh devadmin@192.168.2.15 docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
-                      sh 'ssh devadmin@192.168.2.15 docker rm --force guestbook_app' /*remove prev image */
-                      sh 'ssh devadmin@192.168.2.15 docker run  -d --name guestbook_app -p 8080:8080 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
+                      sh 'ssh -v admin@your-test-server-ip'
+                      sh 'ssh admin@your-test-server-ip docker pull your-private-docker-repo-ip:your-port/guestbook' + ":$BUILD_NUMBER"
+                      sh 'ssh admin@your-test-server-ip docker rm --force guestbook_app' /*remove prev image */
+                      sh 'ssh admin@your-test-server-ip docker run  -d --name guestbook_app -p 8080:8080 your-private-docker-repo-ip:your-port/guestbook' + ":$BUILD_NUMBER"
 
                   }
               }
@@ -109,8 +109,8 @@ pipeline {
         stage('Load Tests'){
          steps{
          /* Load tests */
-          sh 'artillery quick --count 20 -n 20 http://192.168.2.15:8080/guests'
-          sh 'artillery quick --count 20 -n 20 http://192.168.2.15:8080/login'
+          sh 'artillery quick --count 20 -n 20 http://your-test-server-ip:8080/guests'
+          sh 'artillery quick --count 20 -n 20 http://your-test-server-ip:8080/login'
 
          }
         }
