@@ -22,7 +22,17 @@ pipeline {
             )
       }
     }
-
+ stage('Build Docker Image & Publish'){
+      /* Build Docker Image & Publish to Nexus Local  Private Docker registry  */
+         steps{
+             script {
+               dockerImage = docker.build("-f /.docker/stage/Dockerfile .") registry + ":$BUILD_NUMBER"
+                docker.withRegistry( 'http://192.168.2.11:8082', registryCredential ) {
+                  dockerImage.push()
+                }
+             }
+         }
+    }
     stage('Unit Tests'){
       steps {
         sh 'cd guestbook-backend && npm install && npm test '
@@ -49,17 +59,7 @@ pipeline {
              }
           }
 
-    stage('Build Docker Image & Publish'){
-      /* Build Docker Image & Publish to Nexus Local  Private Docker registry  */
-         steps{
-             script {
-               dockerImage = docker.build("-f /.docker/stage/Dockerfile .") registry + ":$BUILD_NUMBER"
-                docker.withRegistry( 'http://192.168.2.11:8082', registryCredential ) {
-                  dockerImage.push()
-                }
-             }
-         }
-    }
+
 
 
     stage('Integration Tests'){
