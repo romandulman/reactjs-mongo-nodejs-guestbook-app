@@ -1,18 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const crypto = require('crypto');
+const crypto = require("crypto");
 
-const userSchema =  new Schema({
-    username: String,
-    password: String,
-    googleId: String,
-    profileimage: String
+const userSchema = new Schema({
+  username: String,
+  password: String,
+  googleId: String,
+  profileimage: String
 });
 
-userSchema.methods.VerifyPassword = (password) =>{
-    console.log(this.password);
-    return this.password === password;
-
+userSchema.methods.VerifyPassword = password => {
+  console.log(this.password);
+  return this.password === password;
 };
 
 /*userSchema.pre('save', function(next) {
@@ -27,6 +26,6 @@ userSchema.methods.VerifyPassword = (password) =>{
 next();
 });*/
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model("user", userSchema);
 
 module.exports = User;
