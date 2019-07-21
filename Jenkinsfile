@@ -22,7 +22,23 @@ pipeline {
             )
       }
     }
-
+stage('Build Frontend'){
+          /* Build React Frontend  */
+             steps{
+              sh 'cd guestbook-frontend && npm  run build'
+             }
+          }
+ stage('Build Docker Image & Publish'){
+      /* Build Docker Image & Publish to Nexus Local  Private Docker registry  */
+         steps{
+             script {
+               dockerImage = docker.build(registry + ":$BUILD_NUMBER" ,"-f .docker/stage/Dockerfile .")
+                docker.withRegistry( 'http://192.168.2.11:8082', registryCredential ) {
+                  dockerImage.push()
+                }
+             }
+         }
+    }
     stage('Unit Tests'){
       steps {
         sh 'cd guestbook-backend && npm install && npm test '
@@ -42,23 +58,7 @@ pipeline {
       }
     }
 
-    stage('Build Frontend'){
-          /* Build React Frontend  */
-             steps{
-              sh 'cd guestbook-frontend && npm  run build'
-             }
-          }
- stage('Build Docker Image & Publish'){
-      /* Build Docker Image & Publish to Nexus Local  Private Docker registry  */
-         steps{
-             script {
-               dockerImage = docker.build(registry + ":$BUILD_NUMBER" ,"-f .docker/stage/Dockerfile .")
-                docker.withRegistry( 'http://192.168.2.11:8082', registryCredential ) {
-                  dockerImage.push()
-                }
-             }
-         }
-    }
+
 
 
 
