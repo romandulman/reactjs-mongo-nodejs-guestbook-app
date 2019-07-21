@@ -53,7 +53,7 @@ pipeline {
       /* Build Docker Image & Publish to Nexus Local  Private Docker registry  */
          steps{
              script {
-               dockerImage = docker.build registry + ":$BUILD_NUMBER"
+               dockerImage = docker.build("-f /.docker/stage/Dockerfile .") registry + ":$BUILD_NUMBER"
                 docker.withRegistry( 'http://192.168.2.11:8082', registryCredential ) {
                   dockerImage.push()
                 }
@@ -83,7 +83,7 @@ pipeline {
     }*/
     /* QA Env; Deploy Docker image to Stage/Test Server */
 
-     stage ('Deploy To Stage Server') {
+     stage ('Deploy To Test/Staging Server') {
              steps{
                   sshagent(credentials : ['OPOTEL-GLOBAL-SSH']) {
 

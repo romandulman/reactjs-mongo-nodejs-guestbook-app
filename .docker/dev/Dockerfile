@@ -6,7 +6,7 @@ COPY  ./guestbook-backend/package*.json ./
 
 RUN npm install
 
-COPY ./guestbook-backend .
+COPY ../../guestbook-backend .
 
 # Copy  react app to our node server public dir
 COPY ./guestbook-frontend/build ./public

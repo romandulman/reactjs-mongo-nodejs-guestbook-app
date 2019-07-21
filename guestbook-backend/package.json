@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./app.js",
+    "start": "node ./app.js",
+    "start:dev": "nodemon --inspect ./app.js ",
     "test": "mocha  --timeout 15000  --require @babel/register  Test/app.test.js --exit",
     "stop": "killall -SIGINT nodejs-guestbook",
     "dis": "node ./app.js"
