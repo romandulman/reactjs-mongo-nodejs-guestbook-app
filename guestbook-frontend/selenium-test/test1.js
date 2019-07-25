@@ -1,9 +1,9 @@
 const chrome = require('selenium-webdriver/chrome');
 const firefox = require('selenium-webdriver/firefox');
 const keys = require('../../guestbook-backend/config/keys');
-const url = require('../../guestbook-backend/config/urls');
+const url = require('./urls');
 const {Builder, By, Key, until} = require('selenium-webdriver');
-var assert = require('assert');
+
 
 let driver = new Builder()
     .forBrowser('firefox')
