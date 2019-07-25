@@ -11,5 +11,10 @@ module.exports = {
   },
   session: {
     cookie_key: "ssshhhh"
+  },
+
+  testLogin:{
+    username: 'roman',
+    password: '123456'
   }
 };

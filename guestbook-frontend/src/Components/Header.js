@@ -75,7 +75,7 @@ class Header extends Component {
               {" "}
               <Link to="/guests">Home</Link>
             </Nav.Link>
-            <Nav.Link onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
+            <Nav.Link name="addGuest" onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
           </Nav>
           <Nav.Item>
             <h5 className="hiText">
