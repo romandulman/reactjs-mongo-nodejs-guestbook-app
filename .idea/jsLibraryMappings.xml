@@ -3,5 +3,6 @@
   <component name="JavaScriptLibraryMappings">
     <file url="PROJECT" libraries="{@types/chai, @types/chai-enzyme, @types/enzyme, @types/express, @types/mocha, @types/mongoose, @types/node, @types/passport, @types/react}" />
     <includedPredefinedLibrary name="HTTP Response Handler" />
+    <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

@@ -61,8 +61,6 @@ pipeline {
          }
     }
 
-
-
     stage('Integration Tests'){
          steps {
           sh 'cd guestbook-backend  '

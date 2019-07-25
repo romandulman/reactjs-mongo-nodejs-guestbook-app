@@ -17,7 +17,6 @@ const guestsRoutes = require('./routes/guests-routes');
 const keys = require('./config/keys');
 const passportCtl = require('./controllers/passportCtl');
 
-
 mongoose.connect(keys.authMongoDB.dbURL);
 mongoose.connection.once('open', () => {
     app.emit('ready');

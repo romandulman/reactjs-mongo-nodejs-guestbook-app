@@ -46,19 +46,7 @@ class AddNew extends Component {
     this.captureImage().then(im => {
       console.log(im);
       arr.Image = im;
-      /* fetch('http://127.0.0.1:8080/files', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json' },
-                    body: [im]
-
-                })
-                    .then(res => {
-                        alert(res)
-                    });
-
-*/
+      console.log( arr.Image)
     });
   };
 
