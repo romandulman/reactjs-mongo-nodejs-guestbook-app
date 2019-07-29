@@ -8,13 +8,14 @@ class guestCtl {
   addGuest(req, res) {
 
     if (req.body.arr.Image.length > 2){
-      let buf = Buffer.from(req.body.arr.Image, "base64");
-      let filename = cryptoRandomString({ length: 10, type: "base64" });
-      var imageUrl = "/image_uploads/" + filename + ".png";
+      const base64String = req.body.arr.Image;
+      const base64Image = base64String.split(';base64,').pop();
+      const buf = Buffer.from(base64Image, "base64");
+      const filename = cryptoRandomString({ length: 10, type: "base64" });
+      var imageUrl = "/image_uploads/" + filename + ".jpg";
       fs.writeFile(
-          path.join(__dirname, "../public/image_uploads", filename + ".png"),
-          buf,
-          function(error) {
+          path.join(__dirname, "../public/image_uploads", filename + ".png"), buf,
+          (error)=> {
             if (error) {
               throw error;
             } else {
@@ -26,7 +27,6 @@ class guestCtl {
       );
     }else{
       imageUrl = "/image_uploads/" + 'default-guest' + ".png";
-
     }
 
     new Guest({
