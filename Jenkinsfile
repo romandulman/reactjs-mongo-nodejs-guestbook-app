@@ -90,7 +90,7 @@ pipeline {
                       sh 'ssh -v devadmin@192.168.2.15'
                       sh 'ssh devadmin@192.168.2.15 docker pull 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
                       sh 'ssh devadmin@192.168.2.15 docker rm --force guestbook_app' /*remove prev image */
-                      sh 'ssh devadmin@192.168.2.15 docker run  -d --name guestbook_app -p 8080:8080 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
+                      sh 'ssh devadmin@192.168.2.15 docker run  -d --name guestbook_app -p 8080:8080 -p 8443:8443 192.168.2.11:8082/guestbook' + ":$BUILD_NUMBER"
 
                   }
               }

@@ -11,5 +11,6 @@ COPY ./guestbook-backend .
 # Copy  react app to our node server public dir
 COPY ./guestbook-frontend/build ./public
 
-EXPOSE 8080
+EXPOSE 8080 8443
+
 CMD [ "npm", "start" ]
