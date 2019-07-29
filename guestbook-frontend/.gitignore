@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-#/selenium-test/urls.js
+/selenium-test/urls.js
 # production
 /build
 
