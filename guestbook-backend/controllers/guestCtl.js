@@ -11,8 +11,8 @@ class guestCtl {
       const base64String = req.body.arr.Image;
       const base64Image = base64String.split(';base64,').pop();
       const buf = Buffer.from(base64Image, "base64");
-      const filename = cryptoRandomString({ length: 10, type: "base64" });
-      var imageUrl = "/image_uploads/" + filename + ".jpg";
+      const filename = cryptoRandomString({ length: 10, type: "url-safe" });
+      var imageUrl = "/image_uploads/" + filename + ".png";
       fs.writeFile(
           path.join(__dirname, "../public/image_uploads", filename + ".png"), buf,
           (error)=> {

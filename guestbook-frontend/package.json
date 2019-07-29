@@ -77,7 +77,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "jest",
-    "seleniumtest": "  mocha --timeout 35000 ./selenium-test/test1.js"
+    "seleniumtest": "  mocha --timeout 60000 ./selenium-test/test1.js"
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {
