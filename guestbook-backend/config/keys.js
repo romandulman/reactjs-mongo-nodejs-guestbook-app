@@ -16,5 +16,9 @@ module.exports = {
   testLogin:{
     username: 'roman',
     password: '123456'
+  },
+  httpsCerts:{
+    key:'./config/certs/server.key',
+    cert:'./config/certs/server.cert'
   }
 };

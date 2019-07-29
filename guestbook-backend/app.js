@@ -9,6 +9,9 @@ const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
@@ -63,13 +66,26 @@ app.use((err, req, res, next) => {
         error: err
     });
 });
-
+const options ={
+    key: fs.readFileSync(keys.httpsCerts.key),
+    cert: fs.readFileSync(keys.httpsCerts.cert)
+};
 //app.on('ready', function() {
-    let server = app.listen(8080, () => {
+/*    let server = app.listen(8080,options, () => {
     let host = 'localhost';
     let port = server.address().port;
+        const options ={
+            key: fs.readFileSync(keys.httpsCerts.key),
+            cert: fs.readFileSync(keys.httpsCerts.cert)
+        };
     console.log("Example app listening at http://%s:%s", host, port)
-});
-    module.exports = server;
+});*/
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(options, app);
+
+httpServer.listen(8080);
+httpsServer.listen(8443);
+
+ module.exports = httpServer;
 //});
 

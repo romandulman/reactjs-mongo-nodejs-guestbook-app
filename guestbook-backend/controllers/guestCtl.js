@@ -6,6 +6,7 @@ const cryptoRandomString = require("crypto-random-string");
 
 class guestCtl {
   addGuest(req, res) {
+
     if (req.body.arr.Image.length > 2){
       let buf = Buffer.from(req.body.arr.Image, "base64");
       let filename = cryptoRandomString({ length: 10, type: "base64" });
@@ -23,6 +24,9 @@ class guestCtl {
             }
           }
       );
+    }else{
+      imageUrl = "/image_uploads/" + 'default-guest' + ".png";
+
     }
 
     new Guest({
