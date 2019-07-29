@@ -62,6 +62,9 @@ class Login extends Component {
           >
             Login with Google
           </Button>
+          <br/>
+          <br/>
+
           <Form>
             <Form.Group>
               <Form.Label>Username</Form.Label>
@@ -94,6 +97,13 @@ class Login extends Component {
           </Button>
           <Button variant="primary" onClick={this.handleLogin}>
             Login
+          </Button>
+
+        </Modal.Footer>
+        <Modal.Footer>
+          <h6>Not a user?</h6>
+          <Button variant="warning" onClick={this.handleLogin}>
+            Sign Up !
           </Button>
         </Modal.Footer>
       </Modal>
