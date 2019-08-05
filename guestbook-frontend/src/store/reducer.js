@@ -1,5 +1,5 @@
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
+
+
 
 const initState = {
     isLoggedIn: false,
@@ -43,11 +43,10 @@ const reducer = (state = initState, action) => {
                         .then(result => {
                             let data = result;
                             console.log(data);
-                            newState.LoggedUserName = data
-                        })
+                            newState.LoggedUserName = data;
 
-
-
+                        });
+                    window.location.assign("/guests");
                 }
             }
             break;

@@ -2,10 +2,20 @@ import React, { Component } from "react";
 import "./Styles.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Dropdown from "react-bootstrap/Dropdown"
 import Login from "./Login";
 import AddNew from "./AddNew";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookReader  } from '@fortawesome/free-solid-svg-icons'
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Badge from '@material-ui/core/Badge';
+
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const mapStateToProps = state => {
   return {
@@ -61,42 +71,65 @@ class Header extends Component {
   render() {
     return (
       <Navbar
-        className="fixed-top"
+        className="fixed-top shadow p-3 bg-white mb-5 navOve"
         collapseOnSelect
         expand="lg"
-        bg="dark"
-        variant="dark"
+        bg="light"
+
       >
-        <Navbar.Brand>Event Guestbook</Navbar.Brand>
+        <Navbar.Brand ><FontAwesomeIcon icon={faBookReader}/> Event Guestbook</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link>
-              {" "}
-              <Link to="/guests">Home</Link>
+              <Link to="/guests"><Button>Home</Button></Link>
             </Nav.Link>
-            <Nav.Link name="addGuest" onClick={this.addGuestHandler}>Add New Guest</Nav.Link>
+            <Nav.Link >
+            <Button color="primary" onClick={this.addGuestHandler} >
+             Add New Guest
+            </Button></Nav.Link>
           </Nav>
           <Nav.Item>
             <h5 className="hiText">
-              {" "}
               {this.props.isLoggedIn
                 ? "Hi " + this.props.UserProfile.Username + " !"
                 : ""}
             </h5>
           </Nav.Item>
           <Nav.Item>
-            {this.props.isLoggedIn && (
-              <Nav.Link>
-                <Link to="/profile">My Profile</Link>
+
+              <Nav.Link>                <Dropdown>
+
+              <Dropdown.Toggle as ={Link}>
+
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                  <Badge badgeContent={this.props.isLoggedIn ? 4 : 0} color="secondary">
+                  <AccountCircle />
+                  </Badge>
+                </IconButton>
+
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu alignRight={true}>
+                {this.props.isLoggedIn && (  <Dropdown.Item> <Link to="/profile">My Profile</Link></Dropdown.Item>  )}
+                <Dropdown.Item onClick={this.props.LoginBtn}> {this.props.isLoggedIn ? "Logout" : "Login"}
+              </Dropdown.Item>
+              </Dropdown.Menu>
+              </Dropdown>
+
+
+
+
+
               </Nav.Link>
-            )}
           </Nav.Item>
           <Nav.Item>
-            {" "}
-            <Nav.Link onClick={this.props.LoginBtn}>
-              {this.props.isLoggedIn ? "Logout" : "Login"}
-            </Nav.Link>
+
           </Nav.Item>
         </Navbar.Collapse>
         <Login />

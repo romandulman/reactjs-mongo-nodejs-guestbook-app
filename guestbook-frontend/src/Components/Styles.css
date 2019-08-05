@@ -81,3 +81,22 @@ body {
 .loginBtn--google:focus {
   background: #e74b37;
 }
+
+.card{
+    max-width: 345px;
+    max-height: 678px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+@media only screen and (min-width: 1080px) {
+    .navOve{
+        height: 68px;
+    }
+}
+/*.navOve{
+    height: 68px;
+}*/
+.caret {
+    display: none;
+}
+.dropdown-toggle:after { content: none }

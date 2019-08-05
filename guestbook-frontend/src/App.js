@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 import Footer from "./Components/Footer";
 import GuestBook from "./Components/GuestBook";
 import Profile from "./Components/Profile";
