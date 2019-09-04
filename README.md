@@ -3,13 +3,13 @@
 
 Gusetbook Awesome App - Mongo DB + Node.JS Backend and React.JS frontend, Docker and Jenkins CD/CI pipeline
 
-#### This Example project implements:
+#### This project implements:
 
 - MVC Architecture
 - Backend: Node.js + Express.js
-- Frontend: React.js + Redux + React Router
+- Frontend: React.js + Redux + React Router + React Bootstrap
+- Hardware: Web cam capture in React to take user profile and guest image
 - DB: MongoDB
-- Web cam capture in React
 - Auth With Passport.js (Google ,Facebook, LocalDB)
 - Unit & Integration tests in both frontend & backend (Mocha, Chai, Chai-HTTP, Jest, Enzyme)
 - Load & Performance tests with Artillery
