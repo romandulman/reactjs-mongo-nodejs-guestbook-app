@@ -75,7 +75,7 @@ if (this.NewUser.UserName.length<3){
   }
 }
 
-/*    fetch("/auth/signup", {
+   fetch("/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -86,7 +86,7 @@ if (this.NewUser.UserName.length<3){
         .then(res => res.json())
         .then(user => {
           this.props.LoginConfirm(user.profile);
-        });*/
+        });
 
   };
 

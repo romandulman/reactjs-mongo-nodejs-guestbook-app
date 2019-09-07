@@ -53,39 +53,26 @@ app.use((req, res, next) => {
     next(createError(404));
 });
 
-// // error handler
-app.use((err, req, res, next) => {
-//   // set locals, only providing error in development
+app.use((err, req, res) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
     res.status(err.status || 500);
     res.status(500).json({
         message: err.message,
         error: err
     });
 });
+
 const options ={
     key: fs.readFileSync(keys.httpsCerts.key),
     cert: fs.readFileSync(keys.httpsCerts.cert)
 };
-//app.on('ready', function() {
-/*    let server = app.listen(8080,options, () => {
-    let host = 'localhost';
-    let port = server.address().port;
-        const options ={
-            key: fs.readFileSync(keys.httpsCerts.key),
-            cert: fs.readFileSync(keys.httpsCerts.cert)
-        };
-    console.log("Example app listening at http://%s:%s", host, port)
-});*/
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(options, app);
 
 httpServer.listen(8080);
 httpsServer.listen(8443);
 
- module.exports = httpServer;
-//});
+module.exports = httpServer;
+
 
