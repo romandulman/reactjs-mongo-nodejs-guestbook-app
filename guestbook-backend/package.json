@@ -37,7 +37,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/register": "^7.4.4",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "mocha-sonarqube-reporter": "^1.0.1",
     "nodemon": "^1.19.0"
   }
